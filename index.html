@@ -6,59 +6,34 @@
   <title>WARGA RT BSDK</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-xxxx" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400&display=swap" rel="stylesheet">
+
   <style>
-    /* Animasi hover halus */
+    body {
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      background: #f9f9f9;
+    }
+    h1 { font-weight: 400; }
     .link-animate {
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      transition: all 0.3s ease;
+      font-weight: 300;
+    }
+    .link-animate i {
+      transition: transform 0.3s ease;
     }
     .link-animate:hover {
-      transform: translateY(-4px) scale(1.02);
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+      background-color: #f1f1f1;
+      border-color: #bdbdbd;
+      color: #000;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.08);
     }
-
-    /* Animasi background gradient */
-    body {
-      background: linear-gradient(-45deg, #6b21a8, #4338ca, #9333ea, #2563eb);
-      background-size: 400% 400%;
-      animation: gradientMove 12s ease infinite;
+    .link-animate:hover i {
+      transform: translateX(4px);
     }
-    @keyframes gradientMove {
-      0% {background-position: 0% 50%;}
-      50% {background-position: 100% 50%;}
-      100% {background-position: 0% 50%;}
-    }
-  </style>
-</head>
-<body class="min-h-screen flex items-center justify-center p-6">
-  <div class="max-w-sm w-full bg-white rounded-2xl shadow-xl p-6 text-center animate-fade-in">
-    <!-- Profil -->
-    <img src="wargart.png" alt="Profile" class="w-28 h-28 rounded-full mx-auto shadow-md border-4 border-purple-500 transition-transform duration-300 hover:scale-110" />
-    <h1 class="mt-4 text-2xl font-bold text-gray-800">WARGA RT BSDK</h1>
-    <p class="text-gray-500 mb-6">Wujud Asri, Rapi, Giat, Aman </br>Rumah Tangga BSDK</p>
-
-    <!-- Link Button dengan ikon -->
-    <div class="space-y-4">
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdklNJRYuUDJBzcQqvpdnjIWENKxJJZzHwaL0BT6o2pCDrdYA/viewform?usp=dialog" class="link-animate flex items-center justify-center gap-2 w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 rounded-xl shadow-md">
-        <i class="fa-solid fa-globe"></i> Checklist Asrama
-      </a>
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdaMfIEK0-r-x3xVQL6K7Pt8UZVdVBJ0ZGcMR82JbgYyguSng/viewform?usp=dialog" class="link-animate flex items-center justify-center gap-2 w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 rounded-xl shadow-md">
-        <i class="fa-brands fa-instagram"></i> Checklist Gedung
-      </a>
-      <a href="#" class="link-animate flex items-center justify-center gap-2 w-full bg-pink-600 hover:bg-pink-700 text-white font-semibold py-3 rounded-xl shadow-md">
-        <i class="fa-brands fa-youtube"></i> Checklist Auditorium
-      </a>
-      <a href="#" class="link-animate flex items-center justify-center gap-2 w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-xl shadow-md">
-        <i class="fa-brands fa-whatsapp"></i> Checklist Taman
-      </a>
-    </div>
-
-    <!-- Footer -->
-    <p class="mt-6 text-xs text-gray-400">© 2025 Dibuat dengan ❤️</p>
-  </div>
-
-  <style>
-    /* Animasi fade in container */
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
@@ -67,9 +42,43 @@
       animation: fadeIn 1s ease-in-out;
     }
   </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-6">
+  <div class="max-w-sm w-full bg-white rounded-2xl shadow-md p-6 text-center animate-fade-in">
+    
+    <!-- Foto Profil Bulat -->
+    <div class="w-28 h-28 rounded-full overflow-hidden mx-auto shadow-md border-2 border-gray-200 transition-transform duration-300 hover:scale-105">
+      <img src="wargart.png" alt="Profile" class="w-full h-full object-cover" />
+    </div>
+
+    <!-- Judul -->
+    <h1 class="mt-4 text-2xl text-gray-800">WARGA RT BSDK</h1>
+    <p class="text-gray-500 text-sm mb-6 px-4 leading-relaxed">
+      Wujud Asri, Rapi, Giat, Aman <br/> Rumah Tangga BSDK
+    </p>
+
+    <!-- Link Buttons -->
+    <div class="space-y-3">
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdklNJRYuUDJBzcQqvpdnjIWENKxJJZzHwaL0BT6o2pCDrdYA/viewform?usp=dialog" 
+         class="link-animate flex items-center justify-center gap-2 w-full bg-white border border-gray-200 text-gray-700 py-3 rounded-xl">
+        <i class="fa-solid fa-bed"></i> Checklist Asrama
+      </a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdaMfIEK0-r-x3xVQL6K7Pt8UZVdVBJ0ZGcMR82JbgYyguSng/viewform?usp=dialog" 
+         class="link-animate flex items-center justify-center gap-2 w-full bg-white border border-gray-200 text-gray-700 py-3 rounded-xl">
+        <i class="fa-solid fa-building"></i> Checklist Gedung
+      </a>
+      <a href="#" 
+         class="link-animate flex items-center justify-center gap-2 w-full bg-white border border-gray-200 text-gray-700 py-3 rounded-xl">
+        <i class="fa-solid fa-landmark"></i> Checklist Auditorium
+      </a>
+      <a href="#" 
+         class="link-animate flex items-center justify-center gap-2 w-full bg-white border border-gray-200 text-gray-700 py-3 rounded-xl">
+        <i class="fa-solid fa-tree"></i> Checklist Taman
+      </a>
+    </div>
+
+    <!-- Footer -->
+    <p class="mt-6 text-xs text-gray-400">© 2025 Dibuat dengan ❤️ oleh WARGA RT BSDK</p>
+  </div>
 </body>
 </html>
-
-
-
-
