@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Linktree</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-xxxx" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    /* Animasi hover halus */
+    .link-animate {
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .link-animate:hover {
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Animasi background gradient */
+    body {
+      background: linear-gradient(-45deg, #6b21a8, #4338ca, #9333ea, #2563eb);
+      background-size: 400% 400%;
+      animation: gradientMove 12s ease infinite;
+    }
+    @keyframes gradientMove {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-6">
+  <div class="max-w-sm w-full bg-white rounded-2xl shadow-xl p-6 text-center animate-fade-in">
+    <!-- Profil -->
+    <img src="https://via.placeholder.com/120" alt="Profile" class="w-28 h-28 rounded-full mx-auto shadow-md border-4 border-purple-500 transition-transform duration-300 hover:scale-110" />
+    <h1 class="mt-4 text-2xl font-bold text-gray-800">Nama Anda</h1>
+    <p class="text-gray-500 mb-6">Deskripsi singkat atau tagline pribadi Anda ✨</p>
+
+    <!-- Link Button dengan ikon -->
+    <div class="space-y-4">
+      <a href="#" class="link-animate flex items-center justify-center gap-2 w-full bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 rounded-xl shadow-md">
+        <i class="fa-solid fa-globe"></i> Website
+      </a>
+      <a href="#" class="link-animate flex items-center justify-center gap-2 w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 rounded-xl shadow-md">
+        <i class="fa-brands fa-instagram"></i> Instagram
+      </a>
+      <a href="#" class="link-animate flex items-center justify-center gap-2 w-full bg-pink-600 hover:bg-pink-700 text-white font-semibold py-3 rounded-xl shadow-md">
+        <i class="fa-brands fa-youtube"></i> YouTube
+      </a>
+      <a href="#" class="link-animate flex items-center justify-center gap-2 w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 rounded-xl shadow-md">
+        <i class="fa-brands fa-whatsapp"></i> WhatsApp
+      </a>
+    </div>
+
+    <!-- Footer -->
+    <p class="mt-6 text-xs text-gray-400">© 2025 Dibuat dengan ❤️</p>
+  </div>
+
+  <style>
+    /* Animasi fade in container */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in {
+      animation: fadeIn 1s ease-in-out;
+    }
+  </style>
+</body>
+</html>
