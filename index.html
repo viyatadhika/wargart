@@ -17,39 +17,20 @@
       background: #f9f9f9;
     }
     h1 { font-weight: 400; }
-
-    /* Lingkaran ikon */
-    .icon-circle {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 32px;
-      height: 32px;
-      border-radius: 9999px;
-      transition: all 0.3s ease;
-      animation: pulse 3s infinite ease-in-out;
-    }
-
-    .link-animate:hover .icon-circle {
-      transform: scale(1.15);
-      box-shadow: 0 0 10px rgba(0,0,0,0.15);
-    }
-
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.1); }
-    }
-
     .link-animate {
       transition: all 0.3s ease;
       font-weight: 300;
-      font-size: 0.9rem;
+    }
+    .link-animate i {
+      transition: transform 0.3s ease;
     }
     .link-animate:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.08);
     }
-
+    .link-animate:hover i {
+      transform: translateX(4px);
+    }
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
@@ -63,64 +44,57 @@
   <div class="max-w-sm w-full bg-white rounded-2xl shadow-md p-6 text-center animate-fade-in">
     
     <!-- Foto Profil Bulat -->
-    <div class="w-24 h-24 rounded-full overflow-hidden mx-auto shadow-md border border-gray-200 transition-transform duration-300 hover:scale-105">
+    <div class="w-28 h-28 rounded-full overflow-hidden mx-auto shadow-md border-2 border-gray-200 transition-transform duration-300 hover:scale-105">
       <img src="wargart.png" alt="Profile" class="w-full h-full object-cover" />
     </div>
 
     <!-- Judul -->
-    <h1 class="mt-4 text-xl text-gray-800">WARGA RT BSDK</h1>
-    <p class="text-gray-500 text-xs mb-6 px-4 leading-relaxed">
+    <h1 class="mt-4 text-2xl text-gray-800">WARGA RT BSDK</h1>
+    <p class="text-gray-500 text-sm mb-6 px-4 leading-relaxed">
       Wujud Asri, Rapi, Giat, Aman <br/> Rumah Tangga BSDK
     </p>
 
-    <!-- Tombol minimalis -->
-    <div class="space-y-2">
-      <a href="#" class="link-animate flex items-center justify-center gap-2 w-full bg-white border border-gray-200 text-gray-700 py-2 rounded-lg">
-        <div class="icon-circle bg-purple-100 text-purple-600">
-          <i class="fa-solid fa-bed"></i>
-        </div>
-        <span>Asrama</span>
+    <!-- Link Buttons -->
+    <div class="space-y-3">
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdklNJRYuUDJBzcQqvpdnjIWENKxJJZzHwaL0BT6o2pCDrdYA/viewform?usp=dialog" 
+         class="link-animate flex items-center justify-center gap-2 w-full bg-purple-100 text-gray-700 py-3 rounded-xl"
+        target="_blank" rel="noopener noreferrer">
+        <i class="fa-solid fa-bed text-purple-600"></i> Checklist Asrama
       </a>
-      <a href="#" class="link-animate flex items-center justify-center gap-2 w-full bg-white border border-gray-200 text-gray-700 py-2 rounded-lg">
-        <div class="icon-circle bg-blue-100 text-blue-600">
-          <i class="fa-solid fa-building"></i>
-        </div>
-        <span>Gedung</span>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdaMfIEK0-r-x3xVQL6K7Pt8UZVdVBJ0ZGcMR82JbgYyguSng/viewform?usp=dialog" 
+         class="link-animate flex items-center justify-center gap-2 w-full bg-blue-100 text-gray-700 py-3 rounded-xl"
+        target="_blank" rel="noopener noreferrer">
+        <i class="fa-solid fa-building text-blue-600"></i> Checklist Gedung
       </a>
-      <a href="#" class="link-animate flex items-center justify-center gap-2 w-full bg-white border border-gray-200 text-gray-700 py-2 rounded-lg">
-        <div class="icon-circle bg-pink-100 text-pink-600">
-          <i class="fa-solid fa-landmark"></i>
-        </div>
-        <span>Auditorium</span>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSeC2PbUJmaKftbl13GPhPGyCdDWFlCTw3ydAZWtg_pPQ9jUgw/viewform?usp=dialog" 
+         class="link-animate flex items-center justify-center gap-2 w-full bg-pink-100 text-gray-700 py-3 rounded-xl"
+        target="_blank" rel="noopener noreferrer">
+        <i class="fa-solid fa-landmark text-pink-600"></i> Checklist Auditorium
       </a>
-      <a href="#" class="link-animate flex items-center justify-center gap-2 w-full bg-white border border-gray-200 text-gray-700 py-2 rounded-lg">
-        <div class="icon-circle bg-rose-100 text-rose-600">
-          <i class="fa-solid fa-house"></i>
-        </div>
-        <span>Rumpim</span>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSezddPMVIRWvMpXdeKGEBvQ6oVEFC8jzLoaDfqrukATELLexQ/viewform?usp=dialog" 
+         class="link-animate flex items-center justify-center gap-2 w-full bg-rose-100 text-gray-700 py-3 rounded-xl"
+        target="_blank" rel="noopener noreferrer">
+        <i class="fa-solid fa-house text-rose-600"></i> Checklist Rumpim
       </a>
-      <a href="#" class="link-animate flex items-center justify-center gap-2 w-full bg-white border border-gray-200 text-gray-700 py-2 rounded-lg">
-        <div class="icon-circle bg-green-100 text-green-600">
-          <i class="fa-solid fa-tree"></i>
-        </div>
-        <span>Taman</span>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdYqmhjKQznogNQ7IKRnupSQPXkhQdlwnwOrgGrVDd12ORbow/viewform?usp=dialog" 
+         class="link-animate flex items-center justify-center gap-2 w-full bg-green-100 text-gray-700 py-3 rounded-xl"
+        target="_blank" rel="noopener noreferrer">
+        <i class="fa-solid fa-tree text-green-600"></i> Checklist Taman
       </a>
-      <a href="#" class="link-animate flex items-center justify-center gap-2 w-full bg-white border border-gray-200 text-gray-700 py-2 rounded-lg">
-        <div class="icon-circle bg-yellow-100 text-yellow-600">
-          <i class="fa-solid fa-elevator"></i>
-        </div>
-        <span>Gondola</span>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLScuKBUdHoVFVT_7u-L3S718FTWinR7-BS8Pov9fxSk2lmNSAQ/viewform?usp=dialog" 
+         class="link-animate flex items-center justify-center gap-2 w-full bg-yellow-100 text-gray-700 py-3 rounded-xl"
+        target="_blank" rel="noopener noreferrer">
+        <i class="fa-solid fa-elevator text-yellow-600"></i> Checklist Gondola
       </a>
-      <a href="#" class="link-animate flex items-center justify-center gap-2 w-full bg-white border border-gray-200 text-gray-700 py-2 rounded-lg">
-        <div class="icon-circle bg-teal-100 text-teal-600">
-          <i class="fa-solid fa-road"></i>
-        </div>
-        <span>General Cleaning</span>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfh-aQjMy-l87dDC-me37iF1L4i-NExvD5Ospj0vxhrqF6-Ew/viewform?usp=dialog" 
+         class="link-animate flex items-center justify-center gap-2 w-full bg-teal-100 text-gray-700 py-3 rounded-xl"
+         target="_blank" rel="noopener noreferrer">
+         <i class="fa-solid fa-road text-teal-600"></i> Checklist General Cleaning
       </a>
     </div>
 
     <!-- Footer -->
-    <p class="mt-5 text-[10px] text-gray-400">© 2025 Dibuat dengan ❤️ oleh WARGA RT BSDK</p>
+    <p class="mt-6 text-xs text-gray-400">© 2025 Dibuat dengan ❤️ oleh WARGA RT BSDK</p>
   </div>
 </body>
 </html>
