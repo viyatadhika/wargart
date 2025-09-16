@@ -16,46 +16,31 @@
       font-weight: 300;
       background: #f9f9f9;
     }
-    h1 { font-weight: 400; }
+    h1 {
+      font-weight: 400;
+    }
     .link-animate {
       transition: all 0.3s ease;
-      font-weight: 400;
+      font-weight: 300;
+      position: relative;
+      overflow: hidden;
     }
     .link-animate:hover {
       transform: translateY(-3px);
-      box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.12);
     }
-
-    /* Animasi fade in */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    .pulse-icon {
+      display: inline-block;
+      animation: pulseIcon 2s infinite ease-in-out;
     }
-    .animate-fade-in {
-      animation: fadeIn 1s ease-in-out;
-    }
-
-    /* Ikon berdenyut */
-    @keyframes pulse {
+    @keyframes pulseIcon {
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.15); }
     }
-    .pulse-icon {
-      animation: pulse 1.5s infinite;
-    }
-
-    /* Hover background sesuai warna */
-    .hover-purple:hover { background-color: #f3e8ff; }   /* ungu muda */
-    .hover-blue:hover { background-color: #e0f2fe; }     /* biru muda */
-    .hover-pink:hover { background-color: #fce7f3; }     /* pink muda */
-    .hover-rose:hover { background-color: #ffe4e6; }     /* rose muda */
-    .hover-green:hover { background-color: #dcfce7; }    /* hijau muda */
-    .hover-yellow:hover { background-color: #fef9c3; }   /* kuning muda */
-    .hover-teal:hover { background-color: #ccfbf1; }     /* teal muda */
   </style>
 </head>
 <body class="min-h-screen flex items-center justify-center p-6">
-  <div class="max-w-sm w-full bg-white rounded-2xl shadow-md p-6 text-center animate-fade-in">
+  <div class="max-w-sm w-full bg-white rounded-2xl shadow-md overflow-hidden animate-fade-in">
     
     <!-- Foto Profil Bulat -->
     <div class="w-28 h-28 rounded-full overflow-hidden mx-auto shadow-md border-2 border-gray-200 transition-transform duration-300 hover:scale-105">
@@ -110,8 +95,18 @@
     <!-- Footer -->
     <p class="mt-6 text-xs text-gray-400">© 2025 Dibuat dengan ❤️ oleh WARGA RT BSDK</p>
   </div>
+  <style>
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fade-in {
+      animation: fadeIn 1s ease-in-out;
+    }
+  </style>
 </body>
 </html>
+
 
 
 
