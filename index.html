@@ -19,24 +19,29 @@
     h1 { font-weight: 400; }
     .link-animate {
       transition: all 0.3s ease;
-      font-weight: 300;
-    }
-    .link-animate i {
-      transition: transform 0.3s ease;
+      font-weight: 400;
     }
     .link-animate:hover {
       transform: translateY(-3px);
       box-shadow: 0 6px 16px rgba(0,0,0,0.08);
     }
-    .link-animate:hover i {
-      transform: translateX(4px);
-    }
+
+    /* Animasi fade in */
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
     .animate-fade-in {
       animation: fadeIn 1s ease-in-out;
+    }
+
+    /* Ikon berdenyut */
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+    }
+    .pulse-icon {
+      animation: pulse 1.5s infinite;
     }
   </style>
 </head>
@@ -54,42 +59,28 @@
       Wujud Asri, Rapi, Giat, Aman <br/> Rumah Tangga BSDK
     </p>
 
-    <!-- Link Buttons -->
-    <div class="space-y-3">
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdklNJRYuUDJBzcQqvpdnjIWENKxJJZzHwaL0BT6o2pCDrdYA/viewform?usp=dialog" 
-         class="link-animate flex items-center justify-center gap-2 w-full bg-purple-100 text-gray-700 py-3 rounded-xl"
-        target="_blank" rel="noopener noreferrer">
-        <i class="fa-solid fa-bed text-purple-600"></i> Checklist Asrama
+    <!-- Tombol Checklist -->
+    <div class="space-y-2">
+      <a href="#" class="link-animate flex items-center justify-center gap-2 w-full bg-white border border-gray-200 text-purple-600 py-2 rounded-lg">
+        <i class="fa-solid fa-bed pulse-icon"></i> Checklist Asrama
       </a>
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdaMfIEK0-r-x3xVQL6K7Pt8UZVdVBJ0ZGcMR82JbgYyguSng/viewform?usp=dialog" 
-         class="link-animate flex items-center justify-center gap-2 w-full bg-blue-100 text-gray-700 py-3 rounded-xl"
-        target="_blank" rel="noopener noreferrer">
-        <i class="fa-solid fa-building text-blue-600"></i> Checklist Gedung
+      <a href="#" class="link-animate flex items-center justify-center gap-2 w-full bg-white border border-gray-200 text-blue-600 py-2 rounded-lg">
+        <i class="fa-solid fa-building pulse-icon"></i> Checklist Gedung
       </a>
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSeC2PbUJmaKftbl13GPhPGyCdDWFlCTw3ydAZWtg_pPQ9jUgw/viewform?usp=dialog" 
-         class="link-animate flex items-center justify-center gap-2 w-full bg-pink-100 text-gray-700 py-3 rounded-xl"
-        target="_blank" rel="noopener noreferrer">
-        <i class="fa-solid fa-landmark text-pink-600"></i> Checklist Auditorium
+      <a href="#" class="link-animate flex items-center justify-center gap-2 w-full bg-white border border-gray-200 text-pink-600 py-2 rounded-lg">
+        <i class="fa-solid fa-landmark pulse-icon"></i> Checklist Auditorium
       </a>
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSezddPMVIRWvMpXdeKGEBvQ6oVEFC8jzLoaDfqrukATELLexQ/viewform?usp=dialog" 
-         class="link-animate flex items-center justify-center gap-2 w-full bg-rose-100 text-gray-700 py-3 rounded-xl"
-        target="_blank" rel="noopener noreferrer">
-        <i class="fa-solid fa-house text-rose-600"></i> Checklist Rumpim
+      <a href="#" class="link-animate flex items-center justify-center gap-2 w-full bg-white border border-gray-200 text-rose-600 py-2 rounded-lg">
+        <i class="fa-solid fa-house pulse-icon"></i> Checklist Rumah Pimpinan
       </a>
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSdYqmhjKQznogNQ7IKRnupSQPXkhQdlwnwOrgGrVDd12ORbow/viewform?usp=dialog" 
-         class="link-animate flex items-center justify-center gap-2 w-full bg-green-100 text-gray-700 py-3 rounded-xl"
-        target="_blank" rel="noopener noreferrer">
-        <i class="fa-solid fa-tree text-green-600"></i> Checklist Taman
+      <a href="#" class="link-animate flex items-center justify-center gap-2 w-full bg-white border border-gray-200 text-green-600 py-2 rounded-lg">
+        <i class="fa-solid fa-tree pulse-icon"></i> Checklist Taman
       </a>
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLScuKBUdHoVFVT_7u-L3S718FTWinR7-BS8Pov9fxSk2lmNSAQ/viewform?usp=dialog" 
-         class="link-animate flex items-center justify-center gap-2 w-full bg-yellow-100 text-gray-700 py-3 rounded-xl"
-        target="_blank" rel="noopener noreferrer">
-        <i class="fa-solid fa-elevator text-yellow-600"></i> Checklist Gondola
+      <a href="#" class="link-animate flex items-center justify-center gap-2 w-full bg-white border border-gray-200 text-yellow-600 py-2 rounded-lg">
+        <i class="fa-solid fa-elevator pulse-icon"></i> Checklist Gondola
       </a>
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfh-aQjMy-l87dDC-me37iF1L4i-NExvD5Ospj0vxhrqF6-Ew/viewform?usp=dialog" 
-         class="link-animate flex items-center justify-center gap-2 w-full bg-teal-100 text-gray-700 py-3 rounded-xl"
-         target="_blank" rel="noopener noreferrer">
-         <i class="fa-solid fa-road text-teal-600"></i> Checklist General Cleaning
+      <a href="#" class="link-animate flex items-center justify-center gap-2 w-full bg-white border border-gray-200 text-teal-600 py-2 rounded-lg">
+        <i class="fa-solid fa-road pulse-icon"></i> Checklist General Cleaning
       </a>
     </div>
 
