@@ -3,102 +3,275 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>WARGA RT BSDK</title>
+  <title>BSDK Super Apps</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  
-  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" />
-  
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: #f9f9f9;
+    body { font-family: 'Poppins', sans-serif; }
+    .scrollbar-hide::-webkit-scrollbar { display: none; }
+
+    /* Animasi */
+    @keyframes fadeUp {
+      0% { opacity: 0; transform: translateY(20px) scale(0.95); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
     }
-    h1 {
-      font-weight: 600;
+    .fade-up { animation: fadeUp 0.6s ease forwards; }
+
+    @keyframes slideLeft {
+      0% { opacity: 0; transform: translateX(-50px); }
+      100% { opacity: 1; transform: translateX(0); }
     }
-    .link-animate {
-      transition: all 0.3s ease;
-      font-weight: 400;
-      position: relative;
-      overflow: hidden;
+    @keyframes slideRight {
+      0% { opacity: 0; transform: translateX(50px); }
+      100% { opacity: 1; transform: translateX(0); }
     }
-    .link-animate:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 6px 16px rgba(0,0,0,0.12);
-    }
-    .pulse-icon {
-      display: inline-block;
-      animation: pulseIcon 2s infinite ease-in-out;
-    }
-    @keyframes pulseIcon {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50% { transform: scale(1.15); opacity: 0.85; }
-    }
-    .animate-fade-in {
-      animation: fadeIn 1s ease-in-out;
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .card-hover:hover {
-      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-      transition: box-shadow 0.3s ease;
-    }
+    .slide-left { animation: slideLeft 0.7s ease forwards; }
+    .slide-right { animation: slideRight 0.7s ease forwards; }
+
+    /* Carousel style */
+    .carousel { scroll-snap-type: x mandatory; }
+    .carousel-item { scroll-snap-align: start; flex: 0 0 100%; }
   </style>
 </head>
-<body class="min-h-screen flex items-center justify-center p-6">
-  <div class="max-w-sm w-full bg-white rounded-2xl shadow-md overflow-hidden animate-fade-in card-hover p-6 text-center">
-    
-    <!-- Foto Profil Bulat -->
-    <div class="w-28 h-28 rounded-full overflow-hidden mx-auto shadow-md border-2 border-gray-200 transition-transform duration-300 hover:scale-105">
-      <img src="wargart.png" alt="Logo Warga RT BSDK" class="w-full h-full object-cover" />
+<body class="bg-gray-100 min-h-screen flex flex-col">
+
+  <!-- HEADER -->
+  <header class="bg-white p-4 flex items-center justify-between shadow-sm">
+    <div>
+      <h1 class="text-base font-semibold">Halo, WARGA RT 👋</h1>
+      <p class="text-xs text-gray-500">Semoga harimu menyenangkan</p>
     </div>
-
-    <!-- Judul -->
-    <h1 class="mt-4 text-2xl text-gray-800">WARGA RT BSDK</h1>
-    <p class="text-gray-500 text-base mb-6 px-2 leading-relaxed">
-      Wujud Asri, Rapi, Giat, Aman <br/> Rumah Tangga BSDK
-    </p>
-
-    <!-- Tombol Checklist -->
-    <div class="space-y-3 text-base">
-      <a href="https://forms.gle/nW6BZfKxKfPAriSu9" target="_blank" rel="noopener noreferrer"
-         class="link-animate flex items-center justify-center gap-2 w-full bg-pink-100 hover:bg-pink-200 text-pink-600 py-3 rounded-xl font-normal">
-        <i class="fa-solid fa-bed pulse-icon"></i> Checklist Asrama
-      </a>
-      <a href="https://forms.gle/Mh7hiJnYXN42FNf8A" target="_blank" rel="noopener noreferrer"
-         class="link-animate flex items-center justify-center gap-2 w-full bg-emerald-100 hover:bg-emerald-200 text-emerald-600 py-3 rounded-xl font-normal">
-        <i class="fa-solid fa-building pulse-icon"></i> Checklist Gedung
-      </a>
-      <a href="https://forms.gle/9Aibit8cAPTjjrzd8" target="_blank" rel="noopener noreferrer"
-         class="link-animate flex items-center justify-center gap-2 w-full bg-orange-100 hover:bg-orange-200 text-orange-600 py-3 rounded-xl font-normal">
-        <i class="fa-solid fa-landmark pulse-icon"></i> Checklist Auditorium
-      </a>
-      <a href="https://forms.gle/YHgHFbvkQy9UpvqGA" target="_blank" rel="noopener noreferrer"
-         class="link-animate flex items-center justify-center gap-2 w-full bg-rose-100 hover:bg-rose-200 text-rose-600 py-3 rounded-xl font-normal">
-        <i class="fa-solid fa-house pulse-icon"></i> Checklist Rumah Pimpinan
-      </a>
-      <a href="https://forms.gle/qDQGBuvR1Qgp7bGc6" target="_blank" rel="noopener noreferrer"
-         class="link-animate flex items-center justify-center gap-2 w-full bg-green-100 hover:bg-green-200 text-green-600 py-3 rounded-xl font-normal">
-        <i class="fa-solid fa-tree pulse-icon"></i> Checklist Taman
-      </a>
-      <a href="https://forms.gle/pS4f6LGP8dJVK2Ks8" target="_blank" rel="noopener noreferrer"
-         class="link-animate flex items-center justify-center gap-2 w-full bg-indigo-100 hover:bg-indigo-200 text-indigo-600 py-3 rounded-xl font-normal">
-        <i class="fa-solid fa-elevator pulse-icon"></i> Checklist Gondola
-      </a>
-      <a href="https://forms.gle/FgzdueVjmLAmNGd9A" target="_blank" rel="noopener noreferrer"
-         class="link-animate flex items-center justify-center gap-2 w-full bg-yellow-100 hover:bg-yellow-200 text-yellow-600 py-3 rounded-xl font-normal">
-        <i class="fa-solid fa-road pulse-icon"></i> Checklist General Cleaning
-      </a>
+    <div class="flex items-center gap-3">
+      
+      <div class="w-9 h-9 rounded-full overflow-hidden border border-gray-300">
+        <img src="wargart.png" alt="Profile" class="w-full h-full object-cover">
+      </div>
     </div>
+  </header>
 
-    <!-- Footer -->
-    <p class="mt-6 text-xs text-gray-400">© 2025 Dibuat dengan ❤️ oleh WARGA RT BSDK</p>
+  <!-- BANNER / CAROUSEL -->
+  <div class="mt-4 px-4 relative">
+    <div id="carousel" class="flex overflow-x-auto carousel scrollbar-hide rounded-2xl">
+      <!-- SLIDE 1 -->
+<div class="carousel-item bg-gradient-to-r from-blue-500 to-indigo-600 text-white p-4 rounded-2xl shadow flex items-center gap-3 slide-left">
+  <div class="w-16 h-16 flex items-center justify-center">
+    <!-- Ilustrasi Dokumen Kartun -->
+    <img src="dokumen.png" alt="Dokumen" class="w-14 h-14">
   </div>
+  <div>
+    <h2 class="text-sm font-semibold">Cek Administrasi</h2>
+    <p class="text-xs opacity-80">Pantau laporan harian dan kegiatan terbaru</p>
+  </div>
+</div>
+
+<!-- SLIDE 2 -->
+<div class="carousel-item bg-gradient-to-r from-green-400 to-emerald-600 text-white p-4 rounded-2xl shadow flex items-center gap-3 slide-right">
+  <div class="w-16 h-16 flex items-center justify-center">
+    <!-- Ilustrasi Cleaning Kartun -->
+    <img src="cleaning.png" alt="Cleaning" class="w-14 h-14">
+  </div>
+  <div>
+    <h2 class="text-sm font-semibold">Update Kebersihan</h2>
+    <p class="text-xs opacity-80">Laporan checklist kebersihan tersedia</p>
+  </div>
+</div>
+
+<!-- SLIDE 3 -->
+<div class="carousel-item bg-gradient-to-r from-orange-400 to-red-500 text-white p-4 rounded-2xl shadow flex items-center gap-3">
+  <div class="w-16 h-16 flex items-center justify-center">
+    <!-- Ilustrasi Grafik Kartun -->
+    <img src="kinerja.png" alt="Kinerja" class="w-14 h-14">
+  </div>
+  <div>
+    <h2 class="text-sm font-semibold">Pemantauan Kinerja</h2>
+    <p class="text-xs opacity-80">Data progres pekerjaan tersedia</p>
+  </div>
+</div>
+    </div>
+    <!-- Indicator -->
+    <div class="flex justify-center mt-2 gap-2">
+      <span class="w-2 h-2 bg-blue-600 rounded-full" id="dot0"></span>
+      <span class="w-2 h-2 bg-gray-400 rounded-full" id="dot1"></span>
+      <span class="w-2 h-2 bg-gray-400 rounded-full" id="dot2"></span>
+    </div>
+  </div>
+<!-- MENU GRID -->
+<main class="flex-1 p-4 pb-24">
+  <h2 class="text-sm font-semibold mb-2">Menu Utama</h2>
+
+  <div class="grid grid-cols-4 gap-4 px-4 mt-4">
+
+    <!-- Asrama -->
+    <a href="https://forms.gle/nW6BZfKxKfPAriSu9" target="_blank"
+       class="group flex flex-col items-center text-gray-700 text-xs animate-fadeInUp delay-300">
+      <div class="w-14 h-14 flex items-center justify-center bg-pink-50 rounded-2xl shadow-md 
+                  group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-pink-200 transition-all duration-300">
+        <i class="fa-solid fa-house-chimney-user text-pink-600 text-2xl"></i>
+      </div>
+      <span class="mt-2 text-center font-medium group-hover:text-pink-600">Asrama</span>
+    </a>
+
+    <!-- Gedung -->
+    <a href="https://forms.gle/Mh7hiJnYXN42FNf8Ag" target="_blank"
+       class="group flex flex-col items-center text-gray-700 text-xs animate-fadeInUp delay-400">
+      <div class="w-14 h-14 flex items-center justify-center bg-emerald-50 rounded-2xl shadow-md 
+                  group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-emerald-200 transition-all duration-300">
+        <i class="fa-solid fa-building text-emerald-600 text-2xl"></i>
+      </div>
+      <span class="mt-2 text-center font-medium group-hover:text-emerald-600">Gedung</span>
+    </a>
+
+    <!-- Auditorium -->
+    <a href="https://forms.gle/9Aibit8cAPTjjrzd8" target="_blank"
+       class="group flex flex-col items-center text-gray-700 text-xs animate-fadeInUp delay-500">
+      <div class="w-14 h-14 flex items-center justify-center bg-orange-50 rounded-2xl shadow-md 
+                  group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-orange-200 transition-all duration-300">
+        <i class="fa-solid fa-school text-orange-600 text-2xl"></i>
+      </div>
+      <span class="mt-2 text-center font-medium group-hover:text-orange-600">Auditorium</span>
+    </a>
+
+    <!-- Rumpim -->
+    <a href="https://forms.gle/YHgHFbvkQy9UpvqGA" target="_blank"
+       class="group flex flex-col items-center text-gray-700 text-xs animate-fadeInUp delay-600">
+      <div class="w-14 h-14 flex items-center justify-center bg-rose-50 rounded-2xl shadow-md 
+                  group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-rose-200 transition-all duration-300">
+        <i class="fa-solid fa-house text-rose-600 text-2xl"></i>
+      </div>
+      <span class="mt-2 text-center font-medium group-hover:text-rose-600">Rumpim</span>
+    </a>
+
+    <!-- Taman -->
+    <a href="https://forms.gle/qDQGBuvR1Qgp7bGc6" target="_blank"
+       class="group flex flex-col items-center text-gray-700 text-xs animate-fadeInUp delay-700">
+      <div class="w-14 h-14 flex items-center justify-center bg-green-50 rounded-2xl shadow-md 
+                  group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-green-200 transition-all duration-300">
+        <i class="fa-solid fa-tree text-green-600 text-2xl"></i>
+      </div>
+      <span class="mt-2 text-center font-medium group-hover:text-green-600">Taman</span>
+    </a>
+
+    <!-- Gondola -->
+    <a href="https://forms.gle/pS4f6LGP8dJVK2Ks8" target="_blank"
+       class="group flex flex-col items-center text-gray-700 text-xs animate-fadeInUp delay-800">
+      <div class="w-14 h-14 flex items-center justify-center bg-indigo-50 rounded-2xl shadow-md 
+                  group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-indigo-200 transition-all duration-300">
+        <i class="fa-solid fa-elevator text-indigo-600 text-2xl"></i>
+      </div>
+      <span class="mt-2 text-center font-medium group-hover:text-indigo-600">Gondola</span>
+    </a>
+
+    <!-- General Cleaning -->
+    <a href="https://forms.gle/FgzdueVjmLAmNGd9A" target="_blank"
+       class="group flex flex-col items-center text-gray-700 text-xs animate-fadeInUp delay-900">
+      <div class="w-14 h-14 flex items-center justify-center bg-cyan-50 rounded-2xl shadow-md 
+                  group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-cyan-200 transition-all duration-300">
+        <i class="fa-solid fa-broom text-cyan-600 text-2xl"></i>
+      </div>
+      <span class="mt-2 text-center font-medium group-hover:text-cyan-600">General<br>Cleaning</span>
+    </a>
+
+  </div>
+
+    <!-- INFO CARD -->
+    <h2 class="text-sm font-semibold mt-6 mb-2">Ringkasan Hari Ini</h2>
+    <div class="grid grid-cols-2 gap-4">
+      <div class="bg-white rounded-xl p-4 shadow flex flex-col opacity-0 fade-up relative" style="animation-delay:1s">
+        <div class="absolute -top-3 -left-3 bg-blue-100 p-2 rounded-full shadow">
+          <i class="fa-solid fa-calendar-check text-blue-600"></i>
+        </div>
+        <span class="text-xs text-gray-500 mt-3">Total Kegiatan</span>
+        <span class="text-lg font-semibold">45</span>
+      </div>
+
+      <div class="bg-white rounded-xl p-4 shadow flex flex-col opacity-0 fade-up relative" style="animation-delay:1.1s">
+        <div class="absolute -top-3 -left-3 bg-indigo-100 p-2 rounded-full shadow">
+          <i class="fa-solid fa-users text-indigo-600"></i>
+        </div>
+        <span class="text-xs text-gray-500 mt-3">Total Peserta</span>
+        <span class="text-lg font-semibold text-blue-600">2436</span>
+      </div>
+
+      <div class="bg-white rounded-xl p-4 shadow flex flex-col opacity-0 fade-up relative" style="animation-delay:1.2s">
+        <div class="absolute -top-3 -left-3 bg-green-100 p-2 rounded-full shadow">
+          <i class="fa-solid fa-bed text-green-600"></i>
+        </div>
+        <span class="text-xs text-gray-500 mt-3">Okupansi Kamar</span>
+        <span class="text-lg font-semibold text-green-600">1239</span>
+      </div>
+
+      <div class="bg-white rounded-xl p-4 shadow flex flex-col opacity-0 fade-up relative" style="animation-delay:1.3s">
+        <div class="absolute -top-3 -left-3 bg-purple-100 p-2 rounded-full shadow">
+          <i class="fa-solid fa-chalkboard-user text-purple-600"></i>
+        </div>
+        <span class="text-xs text-gray-500 mt-3">Okupansi Kelas</span>
+        <span class="text-lg font-semibold text-purple-600">73</span>
+      </div>
+    </div>
+  </main>
+
+ <!-- BOTTOM NAV -->
+<nav class="bg-white border-t shadow-md flex justify-around py-2 text-xs text-gray-600 fixed bottom-0 left-0 right-0 z-50">
+  <!-- Beranda -->
+  <a href="#" class="group flex flex-col items-center text-blue-600 transition-all duration-300">
+    <i class="fa-solid fa-home text-lg mb-0.5 group-hover:scale-110"></i>
+    <span class="group-hover:text-blue-600">Beranda</span>
+  </a>
+
+  <!-- SIKEP -->
+  <a href="https://sikep.mahkamahagung.go.id/" target="_blank" class="group flex flex-col items-center hover:text-blue-600 transition-all duration-300">
+    <i class="fa-solid fa-building-columns text-lg mb-0.5 group-hover:scale-110"></i>
+    <span class="group-hover:text-blue-600">SIKEP</span>
+  </a>
+
+  <!-- e-Kinerja -->
+  <a href="https://asndigital.bkn.go.id/" target="_blank" class="group flex flex-col items-center hover:text-blue-600 transition-all duration-300">
+    <i class="fa-solid fa-briefcase text-lg mb-0.5 group-hover:scale-110"></i>
+    <span class="group-hover:text-blue-600">e-Kinerja</span>
+  </a>
+
+  <!-- Upload PKP -->
+  <a href="https://forms.gle/T8RfTL22i8HDSeuZ6" target="_blank" class="group flex flex-col items-center hover:text-blue-600 transition-all duration-300">
+    <i class="fa-solid fa-upload text-lg mb-0.5 group-hover:scale-110"></i>
+    <span class="group-hover:text-blue-600">Upload PKP</span>
+  </a>
+</nav>
+
+
+
+  <script>
+    // Auto slide carousel
+    const carousel = document.getElementById("carousel");
+    const dots = [document.getElementById("dot0"), document.getElementById("dot1"), document.getElementById("dot2")];
+    let index = 0;
+
+    function showSlide(i) {
+      carousel.scrollTo({ left: carousel.offsetWidth * i, behavior: "smooth" });
+      dots.forEach((dot, idx) => {
+        dot.classList.remove("bg-blue-600");
+        dot.classList.add("bg-gray-400");
+        if (idx === i) {
+          dot.classList.add("bg-blue-600");
+          dot.classList.remove("bg-gray-400");
+        }
+      });
+    }
+
+    setInterval(() => {
+      index = (index + 1) % 3;
+      showSlide(index);
+    }, 4000);
+  </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
