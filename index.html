@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>WARGA RT Splash Screen</title>
+  <title>WARGA RT Super Apps</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
@@ -27,10 +27,10 @@
     }
     .dot {
       display: inline-block;
-      width: 8px;
-      height: 8px;
-      margin: 0 4px;
-      background-color: #1e3a8a; /* biru tua soft */
+      width: 6px;
+      height: 6px;
+      margin: 0 3px;
+      background-color: #1e3a8a;
       border-radius: 9999px;
       animation: bounceDot 1.4s infinite ease-in-out both;
     }
@@ -43,29 +43,28 @@
 
   <!-- Logo -->
   <div class="fade-scale" style="animation-delay:0.2s;">
-    <img src="wargart_splash.png" alt="WARGA RT Logo" class="w-32 h-32 mx-auto mb-6">
+    <img src="wargart_splash.png" alt="WARGA RT Logo" class="w-28 h-28 mx-auto mb-4">
   </div>
 
   <!-- App Name -->
-  <h1 class="text-blue-900 text-4xl font-extrabold mb-2 fade-scale" style="animation-delay:0.5s;">
+  <h1 class="text-blue-900 text-3xl font-bold mb-1 fade-scale" style="animation-delay:0.5s;">
     WARGA RT
   </h1>
 
   <!-- Tagline -->
-  <p class="text-blue-800 text-lg opacity-90 slide-up" style="animation-delay:0.7s;">
+  <p class="text-blue-800 text-sm opacity-90 slide-up" style="animation-delay:0.7s;">
     Wujud • Asri • Rapi • Giat • Aman
   </p>
 
   <!-- Loading Dots -->
-  <div class="flex mt-6 slide-up" style="animation-delay:0.9s;">
+  <div class="flex mt-4 slide-up" style="animation-delay:0.9s;">
     <span class="dot"></span>
     <span class="dot"></span>
     <span class="dot"></span>
   </div>
 
   <script>
-    // Redirect ke halaman utama setelah 3 detik
-    setTimeout(() => { window.location.href = "beranda.html"; }, 3000);
+    setTimeout(() => { window.location.href = "index.html"; }, 3000);
   </script>
 </body>
 </html>
