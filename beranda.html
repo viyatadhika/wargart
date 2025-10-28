@@ -258,6 +258,22 @@
     </div>
   </div>
 
+  <!-- === POPUP PENGUMUMAN PKP === -->
+<div id="popupPKP" class="fixed inset-0 flex items-center justify-center bg-black/40 backdrop-blur-sm z-[60] hidden">
+  <div class="bg-white rounded-2xl shadow-xl w-[90%] max-w-sm p-6 text-center animate-[fadeUp_0.4s_ease_forwards]">
+    <div class="mx-auto mb-3 bg-blue-100 w-14 h-14 flex items-center justify-center rounded-full">
+      <i class="fa-solid fa-bell text-blue-600 text-2xl"></i>
+    </div>
+    <h2 class="text-base font-semibold mb-2">Pengingat PKP Bulanan</h2>
+    <p class="text-sm text-gray-600 leading-relaxed mb-5">
+      Segera kerjakan <span class="font-semibold text-blue-600">PKP bulanan</span> sebelum tanggal <span class="font-semibold">4</span> setiap bulan agar data kinerja tetap terupdate.
+    </p>
+    <button id="closePopup" class="w-full py-2.5 rounded-xl bg-blue-600 text-white font-medium hover:bg-blue-700 transition">
+      Mengerti
+    </button>
+  </div>
+</div>
+
   <script>
     // === CAROUSEL ===
     const carousel = document.getElementById("carousel");
@@ -337,8 +353,40 @@
       }
     });
   </script>
+  <script>
+  // === POPUP PKP ===
+  const popupPKP = document.getElementById('popupPKP');
+  const closePopup = document.getElementById('closePopup');
+
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = now.getMonth();
+  const date = now.getDate();
+
+  // Cari tanggal terakhir di bulan ini
+  const lastDay = new Date(year, month + 1, 0).getDate();
+
+  // Jika termasuk 7 hari terakhir bulan ini (minggu akhir)
+  const isLastWeekOfMonth = date > lastDay - 7;
+
+  if (isLastWeekOfMonth) {
+    popupPKP.classList.remove('hidden');
+  }
+
+  closePopup.addEventListener('click', () => {
+    popupPKP.classList.add('hidden');
+  });
+</script>
+
+<style>
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+</style>
 </body>
 </html>
+
 
 
 
