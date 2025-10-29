@@ -259,7 +259,7 @@
   </div>
 
   <!-- === POPUP PENGUMUMAN PKP === -->
-<div id="popupPKP" class="fixed inset-0 flex items-center justify-center bg-black/40 backdrop-blur-sm z-[60] hidden">
+<!--<div id="popupPKP" class="fixed inset-0 flex items-center justify-center bg-black/40 backdrop-blur-sm z-[60] hidden">
   <div class="bg-white rounded-2xl shadow-xl w-[90%] max-w-sm p-6 text-center animate-[fadeUp_0.4s_ease_forwards]">
     <div class="mx-auto mb-3 bg-blue-100 w-14 h-14 flex items-center justify-center rounded-full">
       <i class="fa-solid fa-bell text-blue-600 text-2xl"></i>
@@ -272,7 +272,44 @@
       Mengerti
     </button>
   </div>
-</div>
+</div>-->
+
+  <!-- === POPUP PENGUMUMAN PKP (UPGRADED VISUALS) === -->
+    <div id="popupPKP" class="fixed inset-0 flex items-center justify-center bg-black/50 backdrop-blur-sm z-[60] hidden">
+        <div class="bg-white rounded-3xl shadow-2xl w-[90%] max-w-sm overflow-hidden animate-[fadeUp_0.4s_ease_forwards]">
+            
+            <!-- Header Visual dengan Gambar dan Gradien -->
+            <div class="relative pt-10 pb-6 px-6 bg-gradient-to-br from-blue-500 to-indigo-600 text-white">
+                <!-- Ikon Utama -->
+                <div class="mx-auto w-16 h-16 flex items-center justify-center rounded-full bg-white/20 backdrop-blur-sm shadow-lg mb-3">
+                    <i class="fa-solid fa-clipboard-list text-3xl"></i>
+                </div>
+                <h2 class="text-xl font-bold mb-1">Tugas Mendesak!</h2>
+                <p class="text-sm opacity-90">Pengingat PKP Bulanan</p>
+                
+                <!-- Ilustrasi Placeholder (Menggunakan Image Placeholder URL untuk tampilan modern) -->
+                <img 
+                    src="https://placehold.co/100x100/3b82f6/ffffff?text=PKP" 
+                    alt="Ilustrasi Tugas" 
+                    class="absolute top-0 right-0 w-24 h-24 object-contain opacity-20 -rotate-12 transform translate-x-4 -translate-y-4"
+                    onerror="this.style.display='none'"
+                >
+            </div>
+            
+            <!-- Konten Utama -->
+            <div class="p-6 text-center">
+                <p class="text-base text-gray-700 leading-relaxed mb-6">
+                    Waktunya menyelesaikan <span class="font-bold text-indigo-700">PKP bulan ini</span>! 
+                    Batas waktu terakhir adalah tanggal <span class="font-bold">4</span>. Pastikan data kinerja Anda tercatat lengkap.
+                </p>
+                <button id="closePopup" class="w-full py-3 rounded-xl bg-indigo-600 text-white font-semibold shadow-md shadow-indigo-300 hover:bg-indigo-700 transition">
+                    Mengerti & Lanjutkan
+                </button>
+            </div>
+            
+        </div>
+    </div>
+    <!-- === END POPUP PENGUMUMAN PKP === -->
 
   <script>
     // === CAROUSEL ===
@@ -386,6 +423,7 @@
 </style>
 </body>
 </html>
+
 
 
 
