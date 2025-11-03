@@ -616,31 +616,31 @@
   });
 
   // Swipe down untuk menutup
-  let startY = 0, currentY = 0, isDragging = false;
+  let upStartY = 0, upCurrentY = 0, upDragging = false;
 
-  uploadSheet.addEventListener('touchstart', (e) => {
-    startY = e.touches[0].clientY;
-    isDragging = true;
-  });
+uploadSheet.addEventListener('touchstart', (e) => {
+  upStartY = e.touches[0].clientY;
+  upDragging = true;
+});
 
-  uploadSheet.addEventListener('touchmove', (e) => {
-    if (!isDragging) return;
-    currentY = e.touches[0].clientY;
-    const deltaY = currentY - startY;
-    if (deltaY > 0) uploadSheet.style.transform = `translateY(${deltaY}px)`;
-  });
+uploadSheet.addEventListener('touchmove', (e) => {
+  if (!upDragging) return;
+  upCurrentY = e.touches[0].clientY;
+  const deltaY = upCurrentY - upStartY;
+  if (deltaY > 0) uploadSheet.style.transform = `translateY(${deltaY}px)`;
+});
 
-  uploadSheet.addEventListener('touchend', () => {
-    isDragging = false;
-    const deltaY = currentY - startY;
-    if (deltaY > 100) {
-      uploadSheet.classList.add("translate-y-full");
-      overlayBg.classList.remove("opacity-100");
-      setTimeout(() => uploadOverlay.classList.add("hidden"), 300);
-    } else {
-      uploadSheet.style.transform = "translateY(0)";
-    }
-  });
+uploadSheet.addEventListener('touchend', () => {
+  upDragging = false;
+  const deltaY = upCurrentY - upStartY;
+  if (deltaY > 100) {
+    uploadSheet.classList.add("translate-y-full");
+    overlayBg.classList.remove("opacity-100");
+    setTimeout(() => uploadOverlay.classList.add("hidden"), 300);
+  } else {
+    uploadSheet.style.transform = "translateY(0)";
+  }
+});
 </script>
 
  
@@ -706,6 +706,7 @@
 </style>
 </body>
 </html>
+
 
 
 
