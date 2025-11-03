@@ -373,9 +373,11 @@
  <!-- 🌟 POPUP PEMBERITAHUAN MOOC -->
 <div id="popupPeringatan"
   class="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-[999]">
-  <div class="bg-white rounded-2xl shadow-xl max-w-sm w-[90%] p-5 text-center animate-fadeIn relative">
+  <div class="popup-content bg-white rounded-2xl shadow-xl max-w-sm w-[90%] p-5 text-center animate-fadeIn relative">
+    <!-- Tombol Close (X) -->
     <button id="closePopup"
-      class="absolute top-2 right-2 text-gray-400 hover:text-gray-600 text-xl font-bold">&times;</button>
+      class="absolute top-2 right-2 text-gray-400 hover:text-gray-600 text-xl font-bold z-[1000]">&times;</button>
+
     <h2 class="text-lg font-semibold text-gray-800 mb-2">🎓 Pembelajaran Mandiri MOOC</h2>
     <p class="text-sm text-gray-600 mb-4 leading-relaxed">
       Segera selesaikan pembelajaran mandiri <b>Massive Online Open Courses (MOOC)</b> melalui website:<br>
@@ -519,11 +521,11 @@
   });
 </script>
 
- <!-- 📆 LOGIKA POPUP -->
+<!-- 📆 LOGIKA POPUP -->
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     const popup = document.getElementById("popupPeringatan");
-    const popupBox = popup.querySelector(".bg-white");
+    const popupBox = popup.querySelector(".popup-content");
     const btnTutup = document.getElementById("btnTutupPopup");
     const closeIcon = document.getElementById("closePopup");
 
@@ -532,22 +534,23 @@
     const endDate = new Date(2025, 10, 19);   // 19 November 2025
     const today = new Date();
 
-    // ✅ Popup hanya muncul jika tanggal hari ini dalam rentang
+    // ✅ Tampilkan popup hanya jika hari ini dalam rentang
     if (today >= startDate && today <= endDate) {
       popup.classList.remove("hidden");
     } else {
       popup.classList.add("hidden");
     }
 
-    // 🔘 Tutup popup (klik tombol atau ikon)
+    // 🔘 Fungsi menutup popup
     function closePopup() {
       popup.classList.add("hidden");
     }
 
+    // Tombol dan ikon tutup
     btnTutup.addEventListener("click", closePopup);
     closeIcon.addEventListener("click", closePopup);
 
-    // 🔘 Tutup popup jika klik di luar area putih
+    // Klik di luar area popup → tutup
     popup.addEventListener("click", function(e) {
       if (!popupBox.contains(e.target)) {
         closePopup();
@@ -608,6 +611,7 @@
 </style>
 </body>
 </html>
+
 
 
 
