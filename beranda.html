@@ -304,33 +304,33 @@
   </div>
 </nav>
 
-  <!-- UPLOAD PRESENSI -->
+ <!-- 🔹 UPLOAD PRESENSI MODAL -->
 <div id="uploadMenuOverlay" class="fixed inset-0 z-50 hidden">
   <!-- Background gelap -->
   <div id="overlayBg" class="absolute inset-0 bg-black bg-opacity-40 opacity-0 transition-opacity duration-300"></div>
 
-  <!-- Sheet konten -->
+  <!-- Konten bottom sheet -->
   <div id="uploadSheet"
     class="absolute bottom-0 left-0 right-0 translate-y-full transition-transform duration-300 bg-white rounded-t-2xl shadow-lg max-h-[85vh] overflow-y-auto">
     
     <div class="sheet-handle w-12 h-1.5 bg-gray-300 rounded-full mt-3 mx-auto"></div>
-    <button id="closeSheet" class="absolute top-3 right-4 text-gray-400 hover:text-gray-600 text-xl">
-        <i class="fa-solid fa-xmark"></i>
-      </button>
-    <div id="sheetContent" class="p-4 pb-8 pt-4">
+    <div class="p-4 pb-8 pt-4">
       <h2 class="text-base font-semibold mb-4 text-center">Upload Presensi</h2>
       <div class="space-y-3">
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdJ0cE3fE7Snb6a4dzfQrM1VL9x-YmEppNxD7qQAsh32tC92A/viewform" target="_blank"
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdJ0cE3fE7Snb6a4dzfQrM1VL9x-YmEppNxD7qQAsh32tC92A/viewform"
+          target="_blank"
           class="flex items-center gap-3 p-3 bg-gray-50 rounded-xl hover:bg-sky-50 transition">
           <i class="fa-solid fa-calendar-days text-blue-600 text-xl"></i>
           <span class="text-sm font-medium">Sekretariat</span>
         </a>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSc1mv-ViBDEHsfTUVhphXyRscmifBZXwX5znuH8Ui4zX-KOmQ/viewform" target="_blank"
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSc1mv-ViBDEHsfTUVhphXyRscmifBZXwX5znuH8Ui4zX-KOmQ/viewform"
+          target="_blank"
           class="flex items-center gap-3 p-3 bg-gray-50 rounded-xl hover:bg-sky-50 transition">
           <i class="fa-solid fa-broom text-purple-600 text-xl"></i>
           <span class="text-sm font-medium">Cleaning Service</span>
         </a>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSeuwvIKORTut8kHq5cyjYUSb_VX8WN-uMJkn096R91uHbAxqw/viewform" target="_blank"
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSeuwvIKORTut8kHq5cyjYUSb_VX8WN-uMJkn096R91uHbAxqw/viewform"
+          target="_blank"
           class="flex items-center gap-3 p-3 bg-gray-50 rounded-xl hover:bg-sky-50 transition">
           <i class="fa-solid fa-shield-halved text-green-600 text-xl"></i>
           <span class="text-sm font-medium">Security</span>
@@ -592,31 +592,66 @@
   });
 </script>
 
-<script>
-  const uploadBtn = document.getElementById('uploadPresensiBtn'); // pastikan id tombol navbar kamu pakai ini
-  const uploadMenuOverlay = document.getElementById('uploadMenuOverlay');
-  const uploadSheet = document.getElementById('uploadSheet');
-  const overlayBg = document.getElementById('overlayBg');
+<!-- 🔹 STYLE TAMBAHAN -->
+<style>
+  #uploadSheet {
+    transition: transform 0.35s ease;
+  }
+  #overlayBg {
+    transition: opacity 0.3s ease;
+  }
+</style>
 
-  // buka sheet
-  uploadBtn.addEventListener('click', () => {
-    uploadMenuOverlay.classList.remove('hidden');
+<!-- 🔹 SCRIPT UPLOAD PRESENSI -->
+<script>
+  const uploadBtn = document.getElementById("uploadPresensiBtn");
+  const uploadOverlay = document.getElementById("uploadMenuOverlay");
+  const overlayBg = document.getElementById("overlayBg");
+  const uploadSheet = document.getElementById("uploadSheet");
+
+  // Buka bottom sheet
+  uploadBtn.addEventListener("click", () => {
+    uploadOverlay.classList.remove("hidden");
     setTimeout(() => {
-      overlayBg.classList.add('opacity-100');
-      uploadSheet.classList.remove('translate-y-full');
+      overlayBg.classList.add("opacity-100");
+      uploadSheet.classList.remove("translate-y-full");
     }, 10);
   });
 
-  // tutup sheet saat klik area luar
-  overlayBg.addEventListener('click', () => {
-    overlayBg.classList.remove('opacity-100');
-    uploadSheet.classList.add('translate-y-full');
-    setTimeout(() => {
-      uploadMenuOverlay.classList.add('hidden');
-    }, 300);
+  // Tutup bila klik area luar
+  overlayBg.addEventListener("click", () => {
+    uploadSheet.classList.add("translate-y-full");
+    overlayBg.classList.remove("opacity-100");
+    setTimeout(() => uploadOverlay.classList.add("hidden"), 300);
+  });
+
+  // Swipe down untuk menutup
+  let startY = 0, currentY = 0, isDragging = false;
+
+  uploadSheet.addEventListener('touchstart', (e) => {
+    startY = e.touches[0].clientY;
+    isDragging = true;
+  });
+
+  uploadSheet.addEventListener('touchmove', (e) => {
+    if (!isDragging) return;
+    currentY = e.touches[0].clientY;
+    const deltaY = currentY - startY;
+    if (deltaY > 0) uploadSheet.style.transform = `translateY(${deltaY}px)`;
+  });
+
+  uploadSheet.addEventListener('touchend', () => {
+    isDragging = false;
+    const deltaY = currentY - startY;
+    if (deltaY > 100) {
+      uploadSheet.classList.add("translate-y-full");
+      overlayBg.classList.remove("opacity-100");
+      setTimeout(() => uploadOverlay.classList.add("hidden"), 300);
+    } else {
+      uploadSheet.style.transform = "translateY(0)";
+    }
   });
 </script>
-
 <style>
   /* Animasi popup muncul */
   @keyframes popupShow {
@@ -667,16 +702,9 @@
     flex-shrink: 0;
   }
 </style>
-
-    <!-- ✨ ANIMASI -->
-<style>
-  /* Saat sheet muncul */
-  .show-sheet #uploadMenu {
-    transform: translateY(0);
-  }
-</style>
 </body>
 </html>
+
 
 
 
