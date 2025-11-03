@@ -273,36 +273,55 @@
     </div>
   </main>
 
-<!-- 🌟 BOTTOM NAVBAR - FIXED SUPER APP STYLE -->
-<nav class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-gray-200 shadow-sm z-50 pb-[env(safe-area-inset-bottom)]">
-  <div class="grid grid-cols-5 text-center text-gray-600 text-[11px] font-medium">
-    <a href="#" class="flex flex-col items-center justify-center py-2 hover:text-blue-600 transition-all">
-      <i class="fa-solid fa-home text-lg mb-1"></i>
-      <span>Beranda</span>
-    </a>
+<!-- 🔹 NAVBAR -->
+<nav class="bg-white border-t shadow-md flex justify-around items-center py-2 text-xs text-gray-600 fixed bottom-0 left-0 right-0 z-50">
+  <a href="#" class="group flex flex-col items-center text-blue-600">
+    <i class="fa-solid fa-home text-lg mb-0.5"></i>
+    <span>Beranda</span>
+  </a>
+  <a href="https://sikep.mahkamahagung.go.id/" target="_blank" class="group flex flex-col items-center hover:text-blue-600">
+    <i class="fa-solid fa-building-columns text-lg mb-0.5"></i>
+    <span>SIKEP</span>
+  </a>
+  <a href="https://asndigital.bkn.go.id/" target="_blank" class="group flex flex-col items-center hover:text-blue-600">
+    <i class="fa-solid fa-briefcase text-lg mb-0.5"></i>
+    <span>e-Kinerja</span>
+  </a>
 
-    <a href="https://sikep.mahkamahagung.go.id/" target="_blank" class="flex flex-col items-center justify-center py-2 hover:text-blue-600 transition-all">
-      <i class="fa-solid fa-building-columns text-lg mb-1"></i>
-      <span>SIKEP</span>
-    </a>
+  <!-- Tombol Upload Presensi -->
+  <button id="openUploadMenu" class="group flex flex-col items-center hover:text-blue-600 focus:outline-none">
+    <i class="fa-solid fa-clock text-lg mb-0.5"></i>
+    <span>Upload Presensi</span>
+  </button>
 
-    <a href="https://asndigital.bkn.go.id/" target="_blank" class="flex flex-col items-center justify-center py-2 hover:text-blue-600 transition-all">
-      <i class="fa-solid fa-briefcase text-lg mb-1"></i>
-      <span>e-Kinerja</span>
-    </a>
-
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSc1mv-ViBDEHsfTUVhphXyRscmifBZXwX5znuH8Ui4zX-KOmQ/viewform" class="flex flex-col items-center justify-center py-2 hover:text-blue-600 transition-all">
-      <i class="fa-solid fa-clock text-lg mb-1"></i>
-      <span>Upload Presensi</span>
-    </a>
-
-    <a href="https://forms.gle/T8RfTL22i8HDSeuZ6" target="_blank" class="flex flex-col items-center justify-center py-2 hover:text-blue-600 transition-all">
-      <i class="fa-solid fa-upload text-lg mb-1"></i>
-      <span>Upload PKP</span>
-    </a>
-
-  </div>
+  <a href="https://forms.gle/T8RfTL22i8HDSeuZ6" target="_blank" class="group flex flex-col items-center hover:text-blue-600">
+    <i class="fa-solid fa-upload text-lg mb-0.5"></i>
+    <span>Upload PKP</span>
+  </a>
 </nav>
+
+<!-- 🔹 BOTTOM SHEET (Swipe Up Menu) -->
+<div id="uploadMenuOverlay"
+  class="hidden fixed inset-0 bg-black/40 backdrop-blur-sm flex items-end justify-center z-[999]">
+  <div id="uploadMenu"
+    class="bg-white rounded-t-2xl w-full max-w-md p-5 shadow-lg transform translate-y-full transition-transform duration-300">
+    <div class="flex justify-between items-center mb-3">
+      <h3 class="text-base font-semibold text-gray-800">Upload Presensi</h3>
+      <button id="closeUploadMenu" class="text-gray-400 hover:text-gray-600 text-xl font-bold">&times;</button>
+    </div>
+
+    <div class="grid grid-cols-1 gap-3 text-sm">
+      <a href="#" class="block text-center py-3 rounded-xl bg-blue-50 text-blue-700 font-medium hover:bg-blue-100">PPNPN</a>
+      <a href="#" class="block text-center py-3 rounded-xl bg-emerald-50 text-emerald-700 font-medium hover:bg-emerald-100">Cleaning Service</a>
+      <a href="#" class="block text-center py-3 rounded-xl bg-amber-50 text-amber-700 font-medium hover:bg-amber-100">Security</a>
+    </div>
+
+    <button id="btnCloseUpload"
+      class="w-full mt-4 py-2 rounded-xl bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium">
+      Tutup
+    </button>
+  </div>
+</div>
 
   <!-- BG -->
   <div id="fadeBg" class="fade-bg"></div>
@@ -556,6 +575,39 @@
   });
 </script>
 
+<!-- ⚙️ LOGIKA JAVASCRIPT -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const overlay = document.getElementById("uploadMenuOverlay");
+    const sheet = document.getElementById("uploadMenu");
+    const openBtn = document.getElementById("openUploadMenu");
+    const closeBtn = document.getElementById("closeUploadMenu");
+    const btnTutup = document.getElementById("btnCloseUpload");
+
+    // 🔹 Buka menu
+    openBtn.addEventListener("click", () => {
+      overlay.classList.remove("hidden");
+      setTimeout(() => overlay.classList.add("show-sheet"), 10); // animasi halus
+    });
+
+    // 🔹 Tutup menu
+    function closeSheet() {
+      overlay.classList.remove("show-sheet");
+      setTimeout(() => overlay.classList.add("hidden"), 300);
+    }
+
+    closeBtn.addEventListener("click", closeSheet);
+    btnTutup.addEventListener("click", closeSheet);
+
+    // 🔹 Klik di luar sheet → tutup
+    overlay.addEventListener("click", (e) => {
+      if (!sheet.contains(e.target)) {
+        closeSheet();
+      }
+    });
+  });
+</script>
+
 <style>
   /* Animasi popup muncul */
   @keyframes popupShow {
@@ -606,8 +658,17 @@
     flex-shrink: 0;
   }
 </style>
+
+    <!-- ✨ ANIMASI -->
+<style>
+  /* Saat sheet muncul */
+  .show-sheet #uploadMenu {
+    transform: translateY(0);
+  }
+</style>
 </body>
 </html>
+
 
 
 
