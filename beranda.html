@@ -291,10 +291,10 @@
       <span>e-Kinerja</span>
     </a>
 
-    <button id="openUploadMenu" class="group flex flex-col items-center gap-0.5 hover:text-blue-600 focus:outline-none">
-      <i class="fa-solid fa-clock text-lg"></i>
-      <span>Upload Presensi</span>
-    </button>
+    <a id="uploadPresensiBtn" href="javascript:void(0)">
+      <i class="fa-solid fa-cloud-arrow-up"></i>
+      <span>Upload</span>
+    </a>
 
     <a href="https://forms.gle/T8RfTL22i8HDSeuZ6" target="_blank" class="flex flex-col items-center justify-center py-2 hover:text-blue-600 transition-all">
       <i class="fa-solid fa-upload text-lg mb-1"></i>
@@ -330,30 +330,37 @@
 </div> -- >
 
   <!-- UPLOAD PRESENSI -->
-  <div id="uploadMenuOverlay" class="sheet">
-    <div class="sheet-handle"></div>
-    <button id="closeSheet" class="absolute top-3 right-4 text-gray-400 hover:text-gray-600 text-xl">
-      <i class="fa-solid fa-xmark"></i>
-    </button>
+<div id="uploadMenuOverlay" class="fixed inset-0 z-50 hidden">
+  <!-- Background gelap -->
+  <div id="overlayBg" class="absolute inset-0 bg-black bg-opacity-40 opacity-0 transition-opacity duration-300"></div>
 
+  <!-- Sheet konten -->
+  <div id="uploadSheet"
+    class="absolute bottom-0 left-0 right-0 translate-y-full transition-transform duration-300 bg-white rounded-t-2xl shadow-lg max-h-[85vh] overflow-y-auto">
+    
+    <div class="sheet-handle w-12 h-1.5 bg-gray-300 rounded-full mt-3 mx-auto"></div>
     <div id="sheetContent" class="p-4 pb-8 pt-4">
       <h2 class="text-base font-semibold mb-4 text-center">Upload Presensi</h2>
       <div class="space-y-3">
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdJ0cE3fE7Snb6a4dzfQrM1VL9x-YmEppNxD7qQAsh32tC92A/viewform" target="_blank" class="flex items-center gap-3 p-3 bg-gray-50 rounded-xl hover:bg-sky-50 transition">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdJ0cE3fE7Snb6a4dzfQrM1VL9x-YmEppNxD7qQAsh32tC92A/viewform" target="_blank"
+          class="flex items-center gap-3 p-3 bg-gray-50 rounded-xl hover:bg-sky-50 transition">
           <i class="fa-solid fa-calendar-days text-blue-600 text-xl"></i>
           <span class="text-sm font-medium">Sekretariat</span>
         </a>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSc1mv-ViBDEHsfTUVhphXyRscmifBZXwX5znuH8Ui4zX-KOmQ/viewform" target="_blank" class="flex items-center gap-3 p-3 bg-gray-50 rounded-xl hover:bg-sky-50 transition">
-          <i class="fa-solid fa-bed text-purple-600 text-xl"></i>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSc1mv-ViBDEHsfTUVhphXyRscmifBZXwX5znuH8Ui4zX-KOmQ/viewform" target="_blank"
+          class="flex items-center gap-3 p-3 bg-gray-50 rounded-xl hover:bg-sky-50 transition">
+          <i class="fa-solid fa-broom text-purple-600 text-xl"></i>
           <span class="text-sm font-medium">Cleaning Service</span>
         </a>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSeuwvIKORTut8kHq5cyjYUSb_VX8WN-uMJkn096R91uHbAxqw/viewform" target="_blank" class="flex items-center gap-3 p-3 bg-gray-50 rounded-xl hover:bg-sky-50 transition">
-          <i class="fa-solid fa-phone text-purple-600 text-xl"></i>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSeuwvIKORTut8kHq5cyjYUSb_VX8WN-uMJkn096R91uHbAxqw/viewform" target="_blank"
+          class="flex items-center gap-3 p-3 bg-gray-50 rounded-xl hover:bg-sky-50 transition">
+          <i class="fa-solid fa-shield-halved text-green-600 text-xl"></i>
           <span class="text-sm font-medium">Security</span>
         </a>
       </div>
     </div>
   </div>
+</div>
 
   <!-- BG -->
   <div id="fadeBg" class="fade-bg"></div>
@@ -607,36 +614,28 @@
   });
 </script>
 
-<!-- ⚙️ LOGIKA JAVASCRIPT -->
 <script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const overlay = document.getElementById("uploadMenuOverlay");
-    const sheet = document.getElementById("uploadMenu");
-    const openBtn = document.getElementById("openUploadMenu");
-    const closeBtn = document.getElementById("closeUploadMenu");
-    const btnTutup = document.getElementById("btnCloseUpload");
+  const uploadBtn = document.getElementById('uploadPresensiBtn'); // pastikan id tombol navbar kamu pakai ini
+  const uploadMenuOverlay = document.getElementById('uploadMenuOverlay');
+  const uploadSheet = document.getElementById('uploadSheet');
+  const overlayBg = document.getElementById('overlayBg');
 
-    // 🔹 Buka menu
-    openBtn.addEventListener("click", () => {
-      overlay.classList.remove("hidden");
-      setTimeout(() => overlay.classList.add("show-sheet"), 10); // animasi halus
-    });
+  // buka sheet
+  uploadBtn.addEventListener('click', () => {
+    uploadMenuOverlay.classList.remove('hidden');
+    setTimeout(() => {
+      overlayBg.classList.add('opacity-100');
+      uploadSheet.classList.remove('translate-y-full');
+    }, 10);
+  });
 
-    // 🔹 Tutup menu
-    function closeSheet() {
-      overlay.classList.remove("show-sheet");
-      setTimeout(() => overlay.classList.add("hidden"), 300);
-    }
-
-    closeBtn.addEventListener("click", closeSheet);
-    btnTutup.addEventListener("click", closeSheet);
-
-    // 🔹 Klik di luar sheet → tutup
-    overlay.addEventListener("click", (e) => {
-      if (!sheet.contains(e.target)) {
-        closeSheet();
-      }
-    });
+  // tutup sheet saat klik area luar
+  overlayBg.addEventListener('click', () => {
+    overlayBg.classList.remove('opacity-100');
+    uploadSheet.classList.add('translate-y-full');
+    setTimeout(() => {
+      uploadMenuOverlay.classList.add('hidden');
+    }, 300);
   });
 </script>
 
@@ -700,6 +699,7 @@
 </style>
 </body>
 </html>
+
 
 
 
