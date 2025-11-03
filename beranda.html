@@ -517,23 +517,35 @@
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     const popup = document.getElementById("popupPeringatan");
-    const closeBtn = document.getElementById("closePopup");
+    const popupBox = popup.querySelector(".bg-white");
+    const btnTutup = document.getElementById("btnTutupPopup");
+    const closeIcon = document.getElementById("closePopup");
 
-    // Tentukan rentang tanggal (misal 25 s.d. 30 setiap bulan)
-    const startDate = 3;
-    const endDate = 3;
+    // 🗓️ Tanggal aktif popup (misal 25 s.d. 30)
+    const startDate = 25;
+    const endDate = 30;
+    const today = new Date().getDate();
 
-    const today = new Date();
-    const currentDate = today.getDate();
-
-    // Tampilkan popup hanya jika tanggal hari ini di antara 25–30
-    if (currentDate >= startDate && currentDate <= endDate) {
+    // ✅ Popup hanya muncul jika hari ini di antara start dan end
+    if (today >= startDate && today <= endDate) {
       popup.classList.remove("hidden");
+    } else {
+      popup.classList.add("hidden");
     }
 
-    // Tutup popup manual
-    closeBtn.addEventListener("click", () => {
+    // 🔘 Tutup popup (klik tombol atau ikon)
+    function closePopup() {
       popup.classList.add("hidden");
+    }
+
+    btnTutup.addEventListener("click", closePopup);
+    closeIcon.addEventListener("click", closePopup);
+
+    // 🔘 Tutup popup jika klik di luar area putih
+    popup.addEventListener("click", function(e) {
+      if (!popupBox.contains(e.target)) {
+        closePopup();
+      }
     });
   });
 </script>
@@ -590,6 +602,7 @@
 </style>
 </body>
 </html>
+
 
 
 
