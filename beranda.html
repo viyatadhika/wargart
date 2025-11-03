@@ -370,6 +370,21 @@
     </div>
     <!-- === END POPUP PENGUMUMAN PKP === -->
 
+  <!-- 🌟 POPUP PEMBERITAHUAN -->
+<div id="popupPeringatan"
+  class="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-[999] hidden">
+  <div class="bg-white rounded-2xl shadow-xl max-w-sm w-[90%] p-5 text-center animate-fadeIn">
+    <h2 class="text-lg font-semibold text-gray-800 mb-2">📅 Pengingat PKP Bulanan</h2>
+    <p class="text-sm text-gray-600 mb-4">
+      Segera kerjakan laporan PKP bulanan sebelum tanggal <b>4</b> setiap bulannya.
+    </p>
+    <button id="closePopup"
+      class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-lg transition-all">
+      Tutup
+    </button>
+  </div>
+</div>
+
   <script>
     // === CAROUSEL ===
     const carousel = document.getElementById("carousel");
@@ -498,6 +513,31 @@
   });
 </script>
 
+  <!-- 📆 SCRIPT PENAMPILAN POPUP BERDASARKAN TANGGAL -->
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const popup = document.getElementById("popupPeringatan");
+    const closeBtn = document.getElementById("closePopup");
+
+    // Tentukan rentang tanggal (misal 25 s.d. 30 setiap bulan)
+    const startDate = 3;
+    const endDate = 3;
+
+    const today = new Date();
+    const currentDate = today.getDate();
+
+    // Tampilkan popup hanya jika tanggal hari ini di antara 25–30
+    if (currentDate >= startDate && currentDate <= endDate) {
+      popup.classList.remove("hidden");
+    }
+
+    // Tutup popup manual
+    closeBtn.addEventListener("click", () => {
+      popup.classList.add("hidden");
+    });
+  });
+</script>
+
 <style>
   /* Animasi popup muncul */
   @keyframes popupShow {
@@ -550,6 +590,7 @@
 </style>
 </body>
 </html>
+
 
 
 
