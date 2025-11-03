@@ -370,15 +370,16 @@
     </div>
     <!-- === END POPUP PENGUMUMAN PKP === -->
 
-  <!-- 🌟 POPUP PEMBERITAHUAN -->
-<div id="popupPeringatan"
-  class="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-[999] hidden">
-  <div class="bg-white rounded-2xl shadow-xl max-w-sm w-[90%] p-5 text-center animate-fadeIn">
+  <div id="popupPeringatan"
+  class="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-[999]">
+  <div class="bg-white rounded-2xl shadow-xl max-w-sm w-[90%] p-5 text-center animate-fadeIn relative">
+    <button id="closePopup"
+      class="absolute top-2 right-2 text-gray-400 hover:text-gray-600 text-xl font-bold">&times;</button>
     <h2 class="text-lg font-semibold text-gray-800 mb-2">📅 Pengingat PKP Bulanan</h2>
     <p class="text-sm text-gray-600 mb-4">
       Segera kerjakan laporan PKP bulanan sebelum tanggal <b>4</b> setiap bulannya.
     </p>
-    <button id="closePopup"
+    <button id="btnTutupPopup"
       class="bg-blue-600 hover:bg-blue-700 text-white font-medium px-4 py-2 rounded-lg transition-all">
       Tutup
     </button>
@@ -602,6 +603,7 @@
 </style>
 </body>
 </html>
+
 
 
 
