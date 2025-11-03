@@ -273,34 +273,42 @@
     </div>
   </main>
 
-<!-- 🌟 NAVBAR MODERN -->
-<nav class="bg-white border-t shadow-md flex justify-around items-center py-2 text-gray-600 text-[11px] fixed bottom-0 left-0 right-0 z-50">
-  <a href="#" class="group flex flex-col items-center gap-0.5 text-blue-600">
-    <i class="fa-solid fa-home text-lg"></i>
-    <span>Beranda</span>
-  </a>
-  <a href="https://sikep.mahkamahagung.go.id/" target="_blank" class="group flex flex-col items-center gap-0.5 hover:text-blue-600">
-    <i class="fa-solid fa-building-columns text-lg"></i>
-    <span>SIKEP</span>
-  </a>
-  <a href="https://asndigital.bkn.go.id/" target="_blank" class="group flex flex-col items-center gap-0.5 hover:text-blue-600">
-    <i class="fa-solid fa-briefcase text-lg"></i>
-    <span>e-Kinerja</span>
-  </a>
-  <button id="openUploadMenu" class="group flex flex-col items-center gap-0.5 hover:text-blue-600 focus:outline-none">
-    <i class="fa-solid fa-clock text-lg"></i>
-    <span>Upload Presensi</span>
-  </button>
-  <a href="https://forms.gle/T8RfTL22i8HDSeuZ6" target="_blank" class="group flex flex-col items-center gap-0.5 hover:text-blue-600">
-    <i class="fa-solid fa-upload text-lg"></i>
-    <span>PKP</span>
-  </a>
+  <!-- 🌟 BOTTOM NAVBAR - FIXED SUPER APP STYLE -->
+<nav class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-gray-200 shadow-sm z-50 pb-[env(safe-area-inset-bottom)]">
+  <div class="grid grid-cols-5 text-center text-gray-600 text-[11px] font-medium">
+    <a href="#" class="flex flex-col items-center justify-center py-2 hover:text-blue-600 transition-all">
+      <i class="fa-solid fa-home text-lg mb-1"></i>
+      <span>Beranda</span>
+    </a>
+
+    <a href="https://sikep.mahkamahagung.go.id/" target="_blank" class="flex flex-col items-center justify-center py-2 hover:text-blue-600 transition-all">
+      <i class="fa-solid fa-building-columns text-lg mb-1"></i>
+      <span>SIKEP</span>
+    </a>
+
+    <a href="https://asndigital.bkn.go.id/" target="_blank" class="flex flex-col items-center justify-center py-2 hover:text-blue-600 transition-all">
+      <i class="fa-solid fa-briefcase text-lg mb-1"></i>
+      <span>e-Kinerja</span>
+    </a>
+
+    <button id="openUploadMenu" class="group flex flex-col items-center gap-0.5 hover:text-blue-600 focus:outline-none">
+      <i class="fa-solid fa-clock text-lg"></i>
+      <span>Upload Presensi</span>
+    </button>
+
+    <a href="https://forms.gle/T8RfTL22i8HDSeuZ6" target="_blank" class="flex flex-col items-center justify-center py-2 hover:text-blue-600 transition-all">
+      <i class="fa-solid fa-upload text-lg mb-1"></i>
+      <span>Upload PKP</span>
+    </a>
+
+  </div>
 </nav>
 
+
 <!-- 🩶 BOTTOM SHEET MODERN -->
-<div id="uploadMenuOverlay" class="hidden fixed inset-0 bg-black/40 backdrop-blur-sm flex items-end justify-center z-[999]">
+<!-- <div id="uploadMenuOverlay" class="hidden fixed inset-0 bg-black/40 backdrop-blur-sm flex items-end justify-center z-[999]">
   <div id="uploadMenu" class="bg-white rounded-t-3xl w-full max-w-md pb-6 pt-4 px-6 shadow-xl transform translate-y-full transition-transform duration-300">
-    <!-- Drag Handle -->
+   
     <div class="w-10 h-1.5 bg-gray-300 rounded-full mx-auto mb-4"></div>
     <h3 class="text-center text-base font-semibold text-gray-800 mb-5">Pilih Jenis Presensi</h3>
 
@@ -319,7 +327,33 @@
       </a>
     </div>
   </div>
-</div>
+</div> -- >
+
+  <!-- UPLOAD PRESENSI -->
+  <div id="uploadMenuOverlay" class="sheet">
+    <div class="sheet-handle"></div>
+    <button id="closeSheet" class="absolute top-3 right-4 text-gray-400 hover:text-gray-600 text-xl">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+
+    <div id="sheetContent" class="p-4 pb-8 pt-4">
+      <h2 class="text-base font-semibold mb-4 text-center">Upload Presensi</h2>
+      <div class="space-y-3">
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSdJ0cE3fE7Snb6a4dzfQrM1VL9x-YmEppNxD7qQAsh32tC92A/viewform" target="_blank" class="flex items-center gap-3 p-3 bg-gray-50 rounded-xl hover:bg-sky-50 transition">
+          <i class="fa-solid fa-calendar-days text-blue-600 text-xl"></i>
+          <span class="text-sm font-medium">Sekretariat</span>
+        </a>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSc1mv-ViBDEHsfTUVhphXyRscmifBZXwX5znuH8Ui4zX-KOmQ/viewform" target="_blank" class="flex items-center gap-3 p-3 bg-gray-50 rounded-xl hover:bg-sky-50 transition">
+          <i class="fa-solid fa-bed text-purple-600 text-xl"></i>
+          <span class="text-sm font-medium">Cleaning Service</span>
+        </a>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSeuwvIKORTut8kHq5cyjYUSb_VX8WN-uMJkn096R91uHbAxqw/viewform" target="_blank" class="flex items-center gap-3 p-3 bg-gray-50 rounded-xl hover:bg-sky-50 transition">
+          <i class="fa-solid fa-phone text-purple-600 text-xl"></i>
+          <span class="text-sm font-medium">Security</span>
+        </a>
+      </div>
+    </div>
+  </div>
 
   <!-- BG -->
   <div id="fadeBg" class="fade-bg"></div>
@@ -666,6 +700,7 @@
 </style>
 </body>
 </html>
+
 
 
 
