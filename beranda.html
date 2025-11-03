@@ -396,7 +396,7 @@
       }
     });
   </script>
-  <script>
+<script>
   // === POPUP PKP ===
   const popupPKP = document.getElementById('popupPKP');
   const closePopup = document.getElementById('closePopup');
@@ -406,20 +406,67 @@
   const month = now.getMonth();
   const date = now.getDate();
 
-  // Cari tanggal terakhir di bulan ini
+  // Key unik per hari agar popup tidak muncul ulang hari yang sama
+  const todayKey = `popupShown_${year}-${month + 1}-${date}`;
+  const hasShownToday = localStorage.getItem(todayKey);
+
+  // Cari tanggal terakhir bulan ini
   const lastDay = new Date(year, month + 1, 0).getDate();
 
-  // Jika termasuk 7 hari terakhir bulan ini (minggu akhir)
+  // Jika termasuk 7 hari terakhir bulan ini
   const isLastWeekOfMonth = date > lastDay - 7;
 
-  if (isLastWeekOfMonth) {
-    popupPKP.classList.remove('hidden');
+  // === Fungsi untuk memainkan suara notifikasi ===
+  function playNotificationSound() {
+    const audio = new Audio("https://cdn.pixabay.com/download/audio/2022/03/15/audio_9a46fbd2f7.mp3?filename=notification-199217.mp3");
+    audio.volume = 0.5;
+    audio.play().catch(() => {}); // mencegah error jika autoplay diblok
   }
 
+  // === Tampilkan popup dengan efek + suara ===
+  if (isLastWeekOfMonth && !hasShownToday) {
+    popupPKP.classList.remove('hidden');
+    const content = popupPKP.querySelector('div');
+    content.classList.add('animate-popup-show');
+    playNotificationSound(); // mainkan suara lembut
+  }
+
+  // === Tutup popup ===
   closePopup.addEventListener('click', () => {
-    popupPKP.classList.add('hidden');
+    const content = popupPKP.querySelector('div');
+    content.classList.remove('animate-popup-show');
+    content.classList.add('animate-popup-hide');
+
+    setTimeout(() => {
+      popupPKP.classList.add('hidden');
+      localStorage.setItem(todayKey, 'true');
+      window.location.href = "beranda.php"; // langsung ke beranda
+    }, 350);
   });
 </script>
+
+<style>
+  /* Animasi popup muncul */
+  @keyframes popupShow {
+    0% { opacity: 0; transform: translateY(40px) scale(0.95); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  /* Animasi popup hilang */
+  @keyframes popupHide {
+    0% { opacity: 1; transform: translateY(0) scale(1); }
+    100% { opacity: 0; transform: translateY(30px) scale(0.95); }
+  }
+
+  .animate-popup-show {
+    animation: popupShow 0.4s ease forwards;
+  }
+
+  .animate-popup-hide {
+    animation: popupHide 0.3s ease forwards;
+  }
+</style>
+
 
 <style>
   @keyframes fadeUp {
@@ -429,6 +476,7 @@
 </style>
 </body>
 </html>
+
 
 
 
