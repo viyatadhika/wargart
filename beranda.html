@@ -598,18 +598,19 @@
 
 <script>
   // === SHEET UPLOAD PRESENSI ===
-  const openUpload = document.getElementById('uploadPresensiBtn');
+  const openUpload = document.getElementById('uploadPresensiBtn'); // tombol navbar
+  const uploadOverlay = document.getElementById('uploadMenuOverlay');
+  const overlayBg = document.getElementById('overlayBg');
   const uploadSheet = document.getElementById('uploadSheet');
-  const fadeUpload = document.getElementById('fadeUpload');
-  const closeUpload = document.getElementById('closeUpload');
-  const uploadContent = document.getElementById('uploadContent');
+  const uploadCloseBtn = document.getElementById('uploadCloseBtn');
 
   const openUploadSheet = () => {
+    // pastikan mulai dari posisi bawah
     uploadSheet.style.transition = "none";
     uploadSheet.style.transform = "translateY(100%)";
+    uploadOverlay.classList.remove("hidden");
     requestAnimationFrame(() => {
-      fadeUpload.classList.remove("invisible");
-      fadeUpload.classList.add("opacity-100");
+      overlayBg.classList.add("opacity-100");
       uploadSheet.style.transition = "transform 0.35s ease";
       uploadSheet.style.transform = "translateY(0)";
     });
@@ -618,22 +619,23 @@
   const closeUploadSheet = () => {
     uploadSheet.style.transition = "transform 0.35s ease";
     uploadSheet.style.transform = "translateY(100%)";
-    fadeUpload.classList.remove("opacity-100");
+    overlayBg.classList.remove("opacity-100");
     setTimeout(() => {
-      fadeUpload.classList.add("invisible");
-      uploadSheet.style.transform = "translateY(100%)";
+      uploadOverlay.classList.add("hidden");
     }, 400);
   };
 
+  // event buka & tutup
   openUpload.addEventListener('click', openUploadSheet);
-  fadeUpload.addEventListener('click', closeUploadSheet);
-  closeUpload.addEventListener('click', closeUploadSheet);
+  overlayBg.addEventListener('click', closeUploadSheet);
+  uploadCloseBtn.addEventListener('click', closeUploadSheet);
 
-  // SWIPE DOWN CLOSE FIX
+  // === SWIPE DOWN UNTUK MENUTUP ===
+  const sheetContent = uploadSheet; // pakai seluruh sheet agar bisa drag dari mana saja
   let startY = 0, currentY = 0, isDragging = false, canClose = false;
 
-  uploadContent.addEventListener('touchstart', (e) => {
-    if (uploadContent.scrollTop <= 0) {
+  sheetContent.addEventListener('touchstart', (e) => {
+    if (sheetContent.scrollTop <= 0) {
       canClose = true;
       startY = e.touches[0].clientY;
       isDragging = true;
@@ -643,7 +645,7 @@
     }
   });
 
-  uploadContent.addEventListener('touchmove', (e) => {
+  sheetContent.addEventListener('touchmove', (e) => {
     if (!isDragging || !canClose) return;
     currentY = e.touches[0].clientY;
     const deltaY = currentY - startY;
@@ -653,7 +655,7 @@
     }
   });
 
-  uploadContent.addEventListener('touchend', () => {
+  sheetContent.addEventListener('touchend', () => {
     if (!isDragging) return;
     isDragging = false;
     const deltaY = currentY - startY;
@@ -728,6 +730,7 @@
 </style>
 </body>
 </html>
+
 
 
 
