@@ -329,13 +329,13 @@
         <a href="https://docs.google.com/forms/d/e/1FAIpQLSc1mv-ViBDEHsfTUVhphXyRscmifBZXwX5znuH8Ui4zX-KOmQ/viewform"
           target="_blank"
           class="flex items-center gap-3 p-3 bg-gray-50 rounded-xl hover:bg-sky-50 transition">
-          <i class="fa-solid fa-broom text-purple-600 text-xl"></i>
+          <i class="fa-solid fa-broom text-blue-600 text-xl"></i>
           <span class="text-sm font-medium">PPPK Cleaning Service</span>
         </a>
         <a href="https://docs.google.com/forms/d/e/1FAIpQLSeuwvIKORTut8kHq5cyjYUSb_VX8WN-uMJkn096R91uHbAxqw/viewform"
           target="_blank"
           class="flex items-center gap-3 p-3 bg-gray-50 rounded-xl hover:bg-sky-50 transition">
-          <i class="fa-solid fa-shield-halved text-purple-600 text-xl"></i>
+          <i class="fa-solid fa-shield-halved text-blue-600 text-xl"></i>
           <span class="text-sm font-medium">PPPK Security</span>
         </a>
       </div>
@@ -361,11 +361,11 @@
           <span class="text-sm font-medium">Timetable Kegiatan</span>
         </a>
         <a href="https://docs.google.com/spreadsheets/d/1H3wMRJaw5R241OE0cgzMWumyR2oeGvVf0HzHBsu8Omg/edit" target="_blank" class="flex items-center gap-3 p-3 bg-gray-50 rounded-xl hover:bg-sky-50 transition">
-          <i class="fa-solid fa-bed text-purple-600 text-xl"></i>
+          <i class="fa-solid fa-bed text-blue-600 text-xl"></i>
           <span class="text-sm font-medium">Cekin Peserta</span>
         </a>
         <a href="https://viyatadhika.github.io/noext/" target="_blank" class="flex items-center gap-3 p-3 bg-gray-50 rounded-xl hover:bg-sky-50 transition">
-          <i class="fa-solid fa-phone text-purple-600 text-xl"></i>
+          <i class="fa-solid fa-phone text-blue-600 text-xl"></i>
           <span class="text-sm font-medium">Nomor Telepon</span>
         </a>
       </div>
@@ -508,6 +508,7 @@
       }
     });
   </script>
+  
 <script>
   // === POPUP PKP ===
   const popupPKP = document.getElementById('popupPKP');
@@ -602,46 +603,53 @@
   const uploadSheet = document.getElementById("uploadSheet");
   const uploadCloseBtn = document.getElementById("uploadCloseBtn");
 
-  // Buka bottom sheet
-  uploadBtn.addEventListener("click", () => {
-    // Scroll ke atas agar posisi sheet selalu benar
-    window.scrollTo({ top: 0, behavior: "smooth" });
+  let lastScrollY = 0;
 
-    // Tampilkan overlay dan sheet
+  function openUploadSheet() {
+    // simpan posisi scroll lalu kunci scroll halaman
+    lastScrollY = window.scrollY;
+    document.body.style.top = `-${lastScrollY}px`;
+    document.body.style.position = "fixed";
+    document.body.style.width = "100%";
+
+    // tampilkan overlay dan sheet
     uploadOverlay.classList.remove("hidden");
     setTimeout(() => {
       overlayBg.classList.add("opacity-100");
       uploadSheet.classList.remove("translate-y-full");
     }, 10);
-  });
-
-  // Tutup sheet (klik luar)
-  overlayBg.addEventListener("click", closeUploadSheet);
-
-  // Tutup sheet (tombol X)
-  uploadCloseBtn.addEventListener("click", closeUploadSheet);
+  }
 
   function closeUploadSheet() {
     uploadSheet.classList.add("translate-y-full");
     overlayBg.classList.remove("opacity-100");
-    setTimeout(() => uploadOverlay.classList.add("hidden"), 300);
+
+    // kembalikan scroll halaman
+    setTimeout(() => {
+      uploadOverlay.classList.add("hidden");
+      document.body.style.position = "";
+      document.body.style.top = "";
+      document.body.style.width = "";
+      window.scrollTo(0, lastScrollY);
+    }, 300);
   }
 
-  // Swipe down untuk menutup
-  let upStartY = 0, upCurrentY = 0, upDragging = false;
+  uploadBtn.addEventListener("click", openUploadSheet);
+  overlayBg.addEventListener("click", closeUploadSheet);
+  uploadCloseBtn.addEventListener("click", closeUploadSheet);
 
+  // swipe gesture
+  let upStartY = 0, upCurrentY = 0, upDragging = false;
   uploadSheet.addEventListener("touchstart", (e) => {
     upStartY = e.touches[0].clientY;
     upDragging = true;
   });
-
   uploadSheet.addEventListener("touchmove", (e) => {
     if (!upDragging) return;
     upCurrentY = e.touches[0].clientY;
     const deltaY = upCurrentY - upStartY;
     if (deltaY > 0) uploadSheet.style.transform = `translateY(${deltaY}px)`;
   });
-
   uploadSheet.addEventListener("touchend", () => {
     upDragging = false;
     const deltaY = upCurrentY - upStartY;
@@ -652,6 +660,7 @@
     }
   });
 </script>
+
 
 <!-- 🔹 STYLE TAMBAHAN -->
 <style>
@@ -715,6 +724,7 @@
 </style>
 </body>
 </html>
+
 
 
 
