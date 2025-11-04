@@ -314,6 +314,9 @@
     class="absolute bottom-0 left-0 right-0 translate-y-full transition-transform duration-300 bg-white rounded-t-2xl shadow-lg max-h-[85vh] overflow-y-auto">
     
     <div class="sheet-handle w-12 h-1.5 bg-gray-300 rounded-full mt-3 mx-auto"></div>
+    <button id="uploadCloseBtn" class="absolute top-3 right-4 text-gray-400 hover:text-gray-600 text-xl">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
     <div class="p-4 pb-8 pt-4">
       <h2 class="text-base font-semibold mb-4 text-center">Upload Presensi</h2>
       <div class="space-y-3">
@@ -592,15 +595,19 @@
   });
 </script>
 
-<!-- 🔹 SCRIPT UPLOAD PRESENSI -->
 <script>
   const uploadBtn = document.getElementById("uploadPresensiBtn");
   const uploadOverlay = document.getElementById("uploadMenuOverlay");
   const overlayBg = document.getElementById("overlayBg");
   const uploadSheet = document.getElementById("uploadSheet");
+  const uploadCloseBtn = document.getElementById("uploadCloseBtn");
 
   // Buka bottom sheet
   uploadBtn.addEventListener("click", () => {
+    // Scroll ke atas agar posisi sheet selalu benar
+    window.scrollTo({ top: 0, behavior: "smooth" });
+
+    // Tampilkan overlay dan sheet
     uploadOverlay.classList.remove("hidden");
     setTimeout(() => {
       overlayBg.classList.add("opacity-100");
@@ -608,42 +615,44 @@
     }, 10);
   });
 
-  // Tutup bila klik area luar
-  overlayBg.addEventListener("click", () => {
+  // Tutup sheet (klik luar)
+  overlayBg.addEventListener("click", closeUploadSheet);
+
+  // Tutup sheet (tombol X)
+  uploadCloseBtn.addEventListener("click", closeUploadSheet);
+
+  function closeUploadSheet() {
     uploadSheet.classList.add("translate-y-full");
     overlayBg.classList.remove("opacity-100");
     setTimeout(() => uploadOverlay.classList.add("hidden"), 300);
-  });
+  }
 
   // Swipe down untuk menutup
   let upStartY = 0, upCurrentY = 0, upDragging = false;
 
-uploadSheet.addEventListener('touchstart', (e) => {
-  upStartY = e.touches[0].clientY;
-  upDragging = true;
-});
+  uploadSheet.addEventListener("touchstart", (e) => {
+    upStartY = e.touches[0].clientY;
+    upDragging = true;
+  });
 
-uploadSheet.addEventListener('touchmove', (e) => {
-  if (!upDragging) return;
-  upCurrentY = e.touches[0].clientY;
-  const deltaY = upCurrentY - upStartY;
-  if (deltaY > 0) uploadSheet.style.transform = `translateY(${deltaY}px)`;
-});
+  uploadSheet.addEventListener("touchmove", (e) => {
+    if (!upDragging) return;
+    upCurrentY = e.touches[0].clientY;
+    const deltaY = upCurrentY - upStartY;
+    if (deltaY > 0) uploadSheet.style.transform = `translateY(${deltaY}px)`;
+  });
 
-uploadSheet.addEventListener('touchend', () => {
-  upDragging = false;
-  const deltaY = upCurrentY - upStartY;
-  if (deltaY > 100) {
-    uploadSheet.classList.add("translate-y-full");
-    overlayBg.classList.remove("opacity-100");
-    setTimeout(() => uploadOverlay.classList.add("hidden"), 300);
-  } else {
-    uploadSheet.style.transform = "translateY(0)";
-  }
-});
+  uploadSheet.addEventListener("touchend", () => {
+    upDragging = false;
+    const deltaY = upCurrentY - upStartY;
+    if (deltaY > 100) {
+      closeUploadSheet();
+    } else {
+      uploadSheet.style.transform = "translateY(0)";
+    }
+  });
 </script>
 
- 
 <!-- 🔹 STYLE TAMBAHAN -->
 <style>
   #uploadSheet {
@@ -706,6 +715,7 @@ uploadSheet.addEventListener('touchend', () => {
 </style>
 </body>
 </html>
+
 
 
 
