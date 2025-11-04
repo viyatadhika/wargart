@@ -597,73 +597,73 @@
 </script>
 
 <script>
-  // === SHEET UPLOAD PRESENSI ===
-  const openUpload = document.getElementById('uploadPresensiBtn'); // tombol navbar
-  const uploadOverlay = document.getElementById('uploadMenuOverlay');
-  const overlayBg = document.getElementById('overlayBg');
-  const uploadSheet = document.getElementById('uploadSheet');
-  const uploadCloseBtn = document.getElementById('uploadCloseBtn');
+  // === SHEET UPLOAD PRESENSI (versi anti-bentrok) ===
+  const openUploadPresensiBtn = document.getElementById('uploadPresensiBtn');
+  const uploadOverlayEl = document.getElementById('uploadMenuOverlay');
+  const uploadBgEl = document.getElementById('overlayBg');
+  const uploadSheetEl = document.getElementById('uploadSheet');
+  const uploadCloseEl = document.getElementById('uploadCloseBtn');
 
-  const openUploadSheet = () => {
-    // pastikan mulai dari posisi bawah
-    uploadSheet.style.transition = "none";
-    uploadSheet.style.transform = "translateY(100%)";
-    uploadOverlay.classList.remove("hidden");
+  const openUploadPresensi = () => {
+    uploadOverlayEl.classList.remove("hidden");
+    uploadBgEl.classList.remove("opacity-0");
+    uploadBgEl.classList.add("opacity-100");
+
+    // pastikan sheet tampil penuh walau user sedang scroll di bawah
+    window.scrollTo({ top: 0, behavior: "instant" });
+
     requestAnimationFrame(() => {
-      overlayBg.classList.add("opacity-100");
-      uploadSheet.style.transition = "transform 0.35s ease";
-      uploadSheet.style.transform = "translateY(0)";
+      uploadSheetEl.style.transition = "transform 0.35s ease";
+      uploadSheetEl.style.transform = "translateY(0)";
     });
   };
 
-  const closeUploadSheet = () => {
-    uploadSheet.style.transition = "transform 0.35s ease";
-    uploadSheet.style.transform = "translateY(100%)";
-    overlayBg.classList.remove("opacity-100");
+  const closeUploadPresensi = () => {
+    uploadSheetEl.style.transition = "transform 0.35s ease";
+    uploadSheetEl.style.transform = "translateY(100%)";
+    uploadBgEl.classList.remove("opacity-100");
+    uploadBgEl.classList.add("opacity-0");
     setTimeout(() => {
-      uploadOverlay.classList.add("hidden");
-    }, 400);
+      uploadOverlayEl.classList.add("hidden");
+    }, 350);
   };
 
-  // event buka & tutup
-  openUpload.addEventListener('click', openUploadSheet);
-  overlayBg.addEventListener('click', closeUploadSheet);
-  uploadCloseBtn.addEventListener('click', closeUploadSheet);
+  // === Event Listener ===
+  openUploadPresensiBtn.addEventListener('click', openUploadPresensi);
+  uploadBgEl.addEventListener('click', closeUploadPresensi);
+  uploadCloseEl.addEventListener('click', closeUploadPresensi);
 
   // === SWIPE DOWN UNTUK MENUTUP ===
-  const sheetContent = uploadSheet; // pakai seluruh sheet agar bisa drag dari mana saja
-  let startY = 0, currentY = 0, isDragging = false, canClose = false;
+  let startY_upload = 0, currentY_upload = 0, isDragging_upload = false, canClose_upload = false;
 
-  sheetContent.addEventListener('touchstart', (e) => {
-    if (sheetContent.scrollTop <= 0) {
-      canClose = true;
-      startY = e.touches[0].clientY;
-      isDragging = true;
-      uploadSheet.style.transition = "none";
-    } else {
-      canClose = false;
-    }
+  uploadSheetEl.addEventListener('touchstart', (e) => {
+    if (uploadSheetEl.scrollTop <= 0) {
+      canClose_upload = true;
+      startY_upload = e.touches[0].clientY;
+      isDragging_upload = true;
+      uploadSheetEl.style.transition = "none";
+    } else canClose_upload = false;
   });
 
-  sheetContent.addEventListener('touchmove', (e) => {
-    if (!isDragging || !canClose) return;
-    currentY = e.touches[0].clientY;
-    const deltaY = currentY - startY;
+  uploadSheetEl.addEventListener('touchmove', (e) => {
+    if (!isDragging_upload || !canClose_upload) return;
+    currentY_upload = e.touches[0].clientY;
+    const deltaY = currentY_upload - startY_upload;
     if (deltaY > 0) {
       e.preventDefault();
-      uploadSheet.style.transform = `translateY(${deltaY}px)`;
+      uploadSheetEl.style.transform = `translateY(${deltaY}px)`;
     }
   });
 
-  sheetContent.addEventListener('touchend', () => {
-    if (!isDragging) return;
-    isDragging = false;
-    const deltaY = currentY - startY;
-    uploadSheet.style.transition = "transform 0.35s ease";
-    if (canClose && deltaY > 100) {
-      closeUploadSheet();
+  uploadSheetEl.addEventListener('touchend', () => {
+    if (!isDragging_upload) return;
+    isDragging_upload = false;
+    const deltaY = currentY_upload - startY_upload;
+    uploadSheetEl.style.transition = "transform 0.35s ease";
+    if (canClose_upload && deltaY > 100) {
+      closeUploadPresensi();
     } else {
-      uploadSheet.style.transform = "translateY(0)";
+      uploadSheetEl.style.transform = "translateY(0)";
     }
   });
 </script>
@@ -730,6 +730,7 @@
 </style>
 </body>
 </html>
+
 
 
 
