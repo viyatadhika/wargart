@@ -597,70 +597,74 @@
 </script>
 
 <script>
-  const uploadBtn = document.getElementById("uploadPresensiBtn");
-  const uploadOverlay = document.getElementById("uploadMenuOverlay");
-  const overlayBg = document.getElementById("overlayBg");
-  const uploadSheet = document.getElementById("uploadSheet");
-  const uploadCloseBtn = document.getElementById("uploadCloseBtn");
+  // === SHEET UPLOAD PRESENSI ===
+  const openUpload = document.getElementById('uploadPresensiBtn');
+  const uploadSheet = document.getElementById('uploadSheet');
+  const fadeUpload = document.getElementById('fadeUpload');
+  const closeUpload = document.getElementById('closeUpload');
+  const uploadContent = document.getElementById('uploadContent');
 
-  let lastScrollY = 0;
+  const openUploadSheet = () => {
+    uploadSheet.style.transition = "none";
+    uploadSheet.style.transform = "translateY(100%)";
+    requestAnimationFrame(() => {
+      fadeUpload.classList.remove("invisible");
+      fadeUpload.classList.add("opacity-100");
+      uploadSheet.style.transition = "transform 0.35s ease";
+      uploadSheet.style.transform = "translateY(0)";
+    });
+  };
 
-  function openUploadSheet() {
-    // simpan posisi scroll lalu kunci scroll halaman
-    lastScrollY = window.scrollY;
-    document.body.style.top = `-${lastScrollY}px`;
-    document.body.style.position = "fixed";
-    document.body.style.width = "100%";
-
-    // tampilkan overlay dan sheet
-    uploadOverlay.classList.remove("hidden");
+  const closeUploadSheet = () => {
+    uploadSheet.style.transition = "transform 0.35s ease";
+    uploadSheet.style.transform = "translateY(100%)";
+    fadeUpload.classList.remove("opacity-100");
     setTimeout(() => {
-      overlayBg.classList.add("opacity-100");
-      uploadSheet.classList.remove("translate-y-full");
-    }, 10);
-  }
+      fadeUpload.classList.add("invisible");
+      uploadSheet.style.transform = "translateY(100%)";
+    }, 400);
+  };
 
-  function closeUploadSheet() {
-    uploadSheet.classList.add("translate-y-full");
-    overlayBg.classList.remove("opacity-100");
+  openUpload.addEventListener('click', openUploadSheet);
+  fadeUpload.addEventListener('click', closeUploadSheet);
+  closeUpload.addEventListener('click', closeUploadSheet);
 
-    // kembalikan scroll halaman
-    setTimeout(() => {
-      uploadOverlay.classList.add("hidden");
-      document.body.style.position = "";
-      document.body.style.top = "";
-      document.body.style.width = "";
-      window.scrollTo(0, lastScrollY);
-    }, 300);
-  }
+  // SWIPE DOWN CLOSE FIX
+  let startY = 0, currentY = 0, isDragging = false, canClose = false;
 
-  uploadBtn.addEventListener("click", openUploadSheet);
-  overlayBg.addEventListener("click", closeUploadSheet);
-  uploadCloseBtn.addEventListener("click", closeUploadSheet);
-
-  // swipe gesture
-  let upStartY = 0, upCurrentY = 0, upDragging = false;
-  uploadSheet.addEventListener("touchstart", (e) => {
-    upStartY = e.touches[0].clientY;
-    upDragging = true;
+  uploadContent.addEventListener('touchstart', (e) => {
+    if (uploadContent.scrollTop <= 0) {
+      canClose = true;
+      startY = e.touches[0].clientY;
+      isDragging = true;
+      uploadSheet.style.transition = "none";
+    } else {
+      canClose = false;
+    }
   });
-  uploadSheet.addEventListener("touchmove", (e) => {
-    if (!upDragging) return;
-    upCurrentY = e.touches[0].clientY;
-    const deltaY = upCurrentY - upStartY;
-    if (deltaY > 0) uploadSheet.style.transform = `translateY(${deltaY}px)`;
+
+  uploadContent.addEventListener('touchmove', (e) => {
+    if (!isDragging || !canClose) return;
+    currentY = e.touches[0].clientY;
+    const deltaY = currentY - startY;
+    if (deltaY > 0) {
+      e.preventDefault();
+      uploadSheet.style.transform = `translateY(${deltaY}px)`;
+    }
   });
-  uploadSheet.addEventListener("touchend", () => {
-    upDragging = false;
-    const deltaY = upCurrentY - upStartY;
-    if (deltaY > 100) {
+
+  uploadContent.addEventListener('touchend', () => {
+    if (!isDragging) return;
+    isDragging = false;
+    const deltaY = currentY - startY;
+    uploadSheet.style.transition = "transform 0.35s ease";
+    if (canClose && deltaY > 100) {
       closeUploadSheet();
     } else {
       uploadSheet.style.transform = "translateY(0)";
     }
   });
 </script>
-
 
 <!-- 🔹 STYLE TAMBAHAN -->
 <style>
@@ -724,6 +728,7 @@
 </style>
 </body>
 </html>
+
 
 
 
