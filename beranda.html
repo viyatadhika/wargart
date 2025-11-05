@@ -255,9 +255,9 @@
   </a>
 
   <!-- Schedule -->
-  <a href="#" target="_blank" class="group flex flex-col items-center text-gray-700 text-xs fade-up" style="animation-delay:2s">
-    <div class="w-14 h-14 flex items-center justify-center bg-amber-50 rounded-2xl shadow-md group-hover:scale-110 transition-all">
-      <i class="fa-solid fa-calendar-days text-amber-600 text-2xl"></i>
+  <a id="openScheduleSecurity" class="group flex flex-col items-center text-gray-700 text-xs fade-up cursor-pointer" style="animation-delay:1.9s">
+    <div class="w-14 h-14 flex items-center justify-center bg-yellow-50 rounded-2xl shadow-md group-hover:scale-110 transition-all">
+      <i class="fa-solid fa-calendar-days text-yellow-600 text-2xl"></i>
     </div>
     <span class="mt-2 font-medium">Schedule</span>
   </a>
@@ -374,6 +374,48 @@
           class="flex items-center gap-3 p-3 bg-gray-50 rounded-xl hover:bg-sky-50 transition">
           <i class="fa-solid fa-shield-halved text-blue-600 text-xl"></i>
           <span class="text-sm font-medium">PPPK Security</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!-- 🔹 SCHEDULE SECURITY MODAL -->
+<div id="scheduleMenuOverlay" class="fixed inset-0 z-50 hidden">
+  <!-- Background gelap -->
+  <div id="scheduleBg" class="absolute inset-0 bg-black bg-opacity-40 opacity-0 transition-opacity duration-300"></div>
+
+  <!-- Konten bottom sheet -->
+  <div id="scheduleSheet"
+    class="absolute bottom-0 left-0 right-0 translate-y-full transition-transform duration-300 bg-white rounded-t-2xl shadow-lg max-h-[85vh] overflow-y-auto">
+
+    <div class="sheet-handle w-12 h-1.5 bg-gray-300 rounded-full mt-3 mx-auto"></div>
+    <button id="scheduleCloseBtn" class="absolute top-3 right-4 text-gray-400 hover:text-gray-600 text-xl">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+
+    <div class="p-4 pb-8 pt-4">
+      <h2 class="text-base font-semibold mb-4 text-center">Schedule Security</h2>
+      <div class="space-y-3">
+        <a href="https://docs.google.com/spreadsheets/d/1HJqqQZCZkPem-VmwePAzmuiNpYYtSkPR8Q1fMOl_W7A/edit?usp=sharing" target="_blank" class="flex items-center gap-3 p-3 bg-blue-50 rounded-xl hover:bg-blue-100 transition">
+          <i class="fa-solid fa-user-clock text-blue-600 text-xl"></i>
+          <span class="text-sm font-medium">Jadwal Piket Pamdal</span>
+        </a>
+        <a href="https://docs.google.com/spreadsheets/d/1eR91RqiGDhr03MIWRVrrzdHWwYwgu_43cV6cI5UUCQM/edit?usp=sharing" target="_blank" class="flex items-center gap-3 p-3 bg-emerald-50 rounded-xl hover:bg-emerald-100 transition">
+          <i class="fa-solid fa-users text-emerald-600 text-xl"></i>
+          <span class="text-sm font-medium">Plotingan Pamdal</span>
+        </a>
+        <a href="https://docs.google.com/spreadsheets/d/1nM6dNTXQPrb6CimUE74envCkS_PiYUyHzRpUNkPLW9o/edit?usp=sharing" target="_blank" class="flex items-center gap-3 p-3 bg-yellow-50 rounded-xl hover:bg-yellow-100 transition">
+          <i class="fa-solid fa-flag text-yellow-600 text-xl"></i>
+          <span class="text-sm font-medium">Penarikan & Penurunan Bendera</span>
+        </a>
+        <a href="https://docs.google.com/spreadsheets/d/1DOMZsTul0Wfi6tZM4HQiU8TRoDpRfpV_sz5UVJ_USkY/edit?usp=sharing" target="_blank" class="flex items-center gap-3 p-3 bg-rose-50 rounded-xl hover:bg-rose-100 transition">
+          <i class="fa-solid fa-fire-extinguisher text-rose-600 text-xl"></i>
+          <span class="text-sm font-medium">Latihan Damkar</span>
+        </a>
+        <a href="https://docs.google.com/spreadsheets/d/1lSnQBwog8fzHgbFeGKff2SwLMZFlG1hIbSj_WEfHvls/edit?usp=sharing" target="_blank" class="flex items-center gap-3 p-3 bg-indigo-50 rounded-xl hover:bg-indigo-100 transition">
+          <i class="fa-solid fa-fingerprint text-indigo-600 text-xl"></i>
+          <span class="text-sm font-medium">Absensi Pamdal</span>
         </a>
       </div>
     </div>
@@ -705,6 +747,36 @@
   });
 </script>
 
+  <script>
+  const openScheduleSecurity = document.getElementById('openScheduleSecurity');
+  const scheduleMenuOverlay = document.getElementById('scheduleMenuOverlay');
+  const scheduleBg = document.getElementById('scheduleBg');
+  const scheduleSheet = document.getElementById('scheduleSheet');
+  const scheduleCloseBtn = document.getElementById('scheduleCloseBtn');
+
+  // buka
+  openScheduleSecurity.addEventListener('click', () => {
+    scheduleMenuOverlay.classList.remove('hidden');
+    setTimeout(() => {
+      scheduleBg.classList.add('opacity-100');
+      scheduleSheet.classList.remove('translate-y-full');
+    }, 10);
+  });
+
+  // tutup
+  function closeScheduleSheet() {
+    scheduleBg.classList.remove('opacity-100');
+    scheduleSheet.classList.add('translate-y-full');
+    setTimeout(() => {
+      scheduleMenuOverlay.classList.add('hidden');
+    }, 300);
+  }
+
+  // klik area luar atau tombol X
+  scheduleBg.addEventListener('click', closeScheduleSheet);
+  scheduleCloseBtn.addEventListener('click', closeScheduleSheet);
+</script>
+
 <!-- 🔹 STYLE TAMBAHAN -->
 <style>
   #uploadSheet {
@@ -767,6 +839,7 @@
 </style>
 </body>
 </html>
+
 
 
 
