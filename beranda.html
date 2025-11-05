@@ -397,24 +397,24 @@
     <div class="p-4 pb-8 pt-4">
       <h2 class="text-base font-semibold mb-4 text-center">Schedule Security</h2>
       <div class="space-y-3">
-        <a href="https://docs.google.com/spreadsheets/d/1HJqqQZCZkPem-VmwePAzmuiNpYYtSkPR8Q1fMOl_W7A/edit?usp=sharing" target="_blank" class="flex items-center gap-3 p-3 bg-blue-50 rounded-xl hover:bg-blue-100 transition">
+        <a href="https://docs.google.com/spreadsheets/d/1HJqqQZCZkPem-VmwePAzmuiNpYYtSkPR8Q1fMOl_W7A/edit?usp=sharing" target="_blank" class="flex items-center gap-3 p-3 bg-gray-50 rounded-xl hover:bg-sky-50 transition">
           <i class="fa-solid fa-user-clock text-blue-600 text-xl"></i>
           <span class="text-sm font-medium">Jadwal Piket Pamdal</span>
         </a>
-        <a href="https://docs.google.com/spreadsheets/d/1eR91RqiGDhr03MIWRVrrzdHWwYwgu_43cV6cI5UUCQM/edit?usp=sharing" target="_blank" class="flex items-center gap-3 p-3 bg-emerald-50 rounded-xl hover:bg-emerald-100 transition">
-          <i class="fa-solid fa-users text-emerald-600 text-xl"></i>
+        <a href="https://docs.google.com/spreadsheets/d/1eR91RqiGDhr03MIWRVrrzdHWwYwgu_43cV6cI5UUCQM/edit?usp=sharing" target="_blank" class="flex items-center gap-3 p-3 bg-gray-50 rounded-xl hover:bg-sky-50 transition">
+          <i class="fa-solid fa-users text-blue-600 text-xl"></i>
           <span class="text-sm font-medium">Plotingan Pamdal</span>
         </a>
-        <a href="https://docs.google.com/spreadsheets/d/1nM6dNTXQPrb6CimUE74envCkS_PiYUyHzRpUNkPLW9o/edit?usp=sharing" target="_blank" class="flex items-center gap-3 p-3 bg-yellow-50 rounded-xl hover:bg-yellow-100 transition">
-          <i class="fa-solid fa-flag text-yellow-600 text-xl"></i>
+        <a href="https://docs.google.com/spreadsheets/d/1nM6dNTXQPrb6CimUE74envCkS_PiYUyHzRpUNkPLW9o/edit?usp=sharing" target="_blank" class="flex items-center gap-3 p-3 bg-gray-50 rounded-xl hover:bg-sky-50 transition">
+          <i class="fa-solid fa-flag text-blue-600 text-xl"></i>
           <span class="text-sm font-medium">Penarikan & Penurunan Bendera</span>
         </a>
-        <a href="https://docs.google.com/spreadsheets/d/1DOMZsTul0Wfi6tZM4HQiU8TRoDpRfpV_sz5UVJ_USkY/edit?usp=sharing" target="_blank" class="flex items-center gap-3 p-3 bg-rose-50 rounded-xl hover:bg-rose-100 transition">
-          <i class="fa-solid fa-fire-extinguisher text-rose-600 text-xl"></i>
+        <a href="https://docs.google.com/spreadsheets/d/1DOMZsTul0Wfi6tZM4HQiU8TRoDpRfpV_sz5UVJ_USkY/edit?usp=sharing" target="_blank" class="flex items-center gap-3 p-3 bg-gray-50 rounded-xl hover:bg-sky-50 transition">
+          <i class="fa-solid fa-fire-extinguisher text-blue-600 text-xl"></i>
           <span class="text-sm font-medium">Latihan Damkar</span>
         </a>
-        <a href="https://docs.google.com/spreadsheets/d/1lSnQBwog8fzHgbFeGKff2SwLMZFlG1hIbSj_WEfHvls/edit?usp=sharing" target="_blank" class="flex items-center gap-3 p-3 bg-indigo-50 rounded-xl hover:bg-indigo-100 transition">
-          <i class="fa-solid fa-fingerprint text-indigo-600 text-xl"></i>
+        <a href="https://docs.google.com/spreadsheets/d/1lSnQBwog8fzHgbFeGKff2SwLMZFlG1hIbSj_WEfHvls/edit?usp=sharing" target="_blank" class="flex items-center gap-3 p-3 bg-gray-50 rounded-xl hover:bg-sky-50 transition">
+          <i class="fa-solid fa-fingerprint text-blue-600 text-xl"></i>
           <span class="text-sm font-medium">Absensi Pamdal</span>
         </a>
       </div>
@@ -748,33 +748,75 @@
 </script>
 
   <script>
-  const openScheduleSecurity = document.getElementById('openScheduleSecurity');
-  const scheduleMenuOverlay = document.getElementById('scheduleMenuOverlay');
-  const scheduleBg = document.getElementById('scheduleBg');
-  const scheduleSheet = document.getElementById('scheduleSheet');
-  const scheduleCloseBtn = document.getElementById('scheduleCloseBtn');
+  // === SHEET SCHEDULE SECURITY (versi anti-bentrok) ===
+  const openScheduleBtn = document.getElementById('openScheduleSecurity');
+  const scheduleOverlayEl = document.getElementById('scheduleMenuOverlay');
+  const scheduleBgEl = document.getElementById('scheduleBg');
+  const scheduleSheetEl = document.getElementById('scheduleSheet');
+  const scheduleCloseEl = document.getElementById('scheduleCloseBtn');
 
-  // buka
-  openScheduleSecurity.addEventListener('click', () => {
-    scheduleMenuOverlay.classList.remove('hidden');
+  const openSchedule = () => {
+    scheduleOverlayEl.classList.remove("hidden");
+    scheduleBgEl.classList.remove("opacity-0");
+    scheduleBgEl.classList.add("opacity-100");
+
+    // pastikan sheet tampil dari atas meski user sedang scroll
+    window.scrollTo({ top: 0, behavior: "instant" });
+
+    requestAnimationFrame(() => {
+      scheduleSheetEl.style.transition = "transform 0.35s ease";
+      scheduleSheetEl.style.transform = "translateY(0)";
+    });
+  };
+
+  const closeSchedule = () => {
+    scheduleSheetEl.style.transition = "transform 0.35s ease";
+    scheduleSheetEl.style.transform = "translateY(100%)";
+    scheduleBgEl.classList.remove("opacity-100");
+    scheduleBgEl.classList.add("opacity-0");
     setTimeout(() => {
-      scheduleBg.classList.add('opacity-100');
-      scheduleSheet.classList.remove('translate-y-full');
-    }, 10);
+      scheduleOverlayEl.classList.add("hidden");
+    }, 350);
+  };
+
+  // === Event Listener ===
+  openScheduleBtn.addEventListener('click', openSchedule);
+  scheduleBgEl.addEventListener('click', closeSchedule);
+  scheduleCloseEl.addEventListener('click', closeSchedule);
+
+  // === SWIPE DOWN UNTUK MENUTUP ===
+  let startY_schedule = 0, currentY_schedule = 0, isDragging_schedule = false, canClose_schedule = false;
+
+  scheduleSheetEl.addEventListener('touchstart', (e) => {
+    if (scheduleSheetEl.scrollTop <= 0) {
+      canClose_schedule = true;
+      startY_schedule = e.touches[0].clientY;
+      isDragging_schedule = true;
+      scheduleSheetEl.style.transition = "none";
+    } else canClose_schedule = false;
   });
 
-  // tutup
-  function closeScheduleSheet() {
-    scheduleBg.classList.remove('opacity-100');
-    scheduleSheet.classList.add('translate-y-full');
-    setTimeout(() => {
-      scheduleMenuOverlay.classList.add('hidden');
-    }, 300);
-  }
+  scheduleSheetEl.addEventListener('touchmove', (e) => {
+    if (!isDragging_schedule || !canClose_schedule) return;
+    currentY_schedule = e.touches[0].clientY;
+    const deltaY = currentY_schedule - startY_schedule;
+    if (deltaY > 0) {
+      e.preventDefault();
+      scheduleSheetEl.style.transform = `translateY(${deltaY}px)`;
+    }
+  });
 
-  // klik area luar atau tombol X
-  scheduleBg.addEventListener('click', closeScheduleSheet);
-  scheduleCloseBtn.addEventListener('click', closeScheduleSheet);
+  scheduleSheetEl.addEventListener('touchend', () => {
+    if (!isDragging_schedule) return;
+    isDragging_schedule = false;
+    const deltaY = currentY_schedule - startY_schedule;
+    scheduleSheetEl.style.transition = "transform 0.35s ease";
+    if (canClose_schedule && deltaY > 100) {
+      closeSchedule();
+    } else {
+      scheduleSheetEl.style.transform = "translateY(0)";
+    }
+  });
 </script>
 
 <!-- 🔹 STYLE TAMBAHAN -->
@@ -839,6 +881,7 @@
 </style>
 </body>
 </html>
+
 
 
 
